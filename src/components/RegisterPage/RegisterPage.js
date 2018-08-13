@@ -10,6 +10,7 @@ class RegisterPage extends Component {
       username: '',
       password: '',
       message: '',
+      role: ''
     };
   }
 
@@ -24,6 +25,7 @@ class RegisterPage extends Component {
       const body = {
         username: this.state.username,
         password: this.state.password,
+        role: this.state.role
       };
 
       // making the request to the server to post the new user's registration
@@ -91,6 +93,16 @@ class RegisterPage extends Component {
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="role">
+              Select a Position:
+          <select onChange={this.handleInputChangeFor('role')}>
+                <option value="">Therapist/Patient</option>
+                <option value="therapist">Therapist</option>
+                <option value="patient">Patient</option>
+              </select>
             </label>
           </div>
           <div>
