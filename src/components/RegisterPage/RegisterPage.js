@@ -99,7 +99,7 @@ class RegisterPage extends Component {
             <label htmlFor="role">
               Select a Position:
           <select onChange={this.handleInputChangeFor('role')}>
-                <option value="">Therapist/Patient</option>
+                <option value="">Select</option>
                 <option value="therapist">Therapist</option>
                 <option value="patient">Patient</option>
               </select>

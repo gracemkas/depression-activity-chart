@@ -26,7 +26,7 @@ class InfoPage extends Component {
       content = (
         <div>
           <p>
-            Info Page
+            {/* <PatientChooseTherapist/> */}
           </p>
         </div>
       );
