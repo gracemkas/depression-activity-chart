@@ -68,14 +68,9 @@ class PatientGraph extends Component {
         }
     }
 
-    editSubmit = () => {
-        console.log('edit submit', this.state.editItem)
-        this.props.dispatch({
-            type: 'UPDATE_ITEM',
-            payload: this.state.editItem,
-            id: this.state.id
-        })
-    }
+    // patientGraph = () => {
+    //     this.props.history.push('patientGraphUpdate');
+    // }
 
     render() {
         let content = null;
@@ -113,7 +108,7 @@ class PatientGraph extends Component {
                     <p>Graph of Today's Mood</p>
                     {/* <LineChart messages={{empty: "No data"}} xtitle="Time" ytitle="Depression Rating"  data={this.state} /> */}
                     <VictoryChart
-                        theme={VictoryTheme.material}
+                        // theme={VictoryTheme.material}
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
                         domainPadding={{ x: 15 }}
@@ -121,6 +116,26 @@ class PatientGraph extends Component {
                         <VictoryBar data={data}
                             // data accessor for x values
                             style={{ data: { fill: "#DF744A" } }}
+                            events={[{
+                                target: "data",
+                                eventHandlers: {
+                                  onClick: () => {
+                                      console.log('clicked')   
+                                    // return [
+                                    //   {
+                                    //     target: "data",
+                                    //     // mutation: (props) => {
+                                    //     //   const fill = props.style && props.style.fill;
+                                    //     //   return fill === "black" ? null : { style: { fill: "black" } };
+                                    //     // }
+                                    //     patientGraph: () => {
+                                            this.props.history.push('patientGraphUpdate');
+                                        // }
+                                    //   }
+                                    // ];
+                                }
+                            }
+                        }]}
                             x="time"
                             // data accessor for y values
                             y="depression_rating"
