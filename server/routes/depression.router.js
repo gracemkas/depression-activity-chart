@@ -3,11 +3,21 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const moment = require('moment');
 
-/**
- * GET route template
- */
 router.get('/', (req, res) => {
-    
+    if (req.isAuthenticated) {
+        const queryText = `SELECT EXTRACT (HOUR FROM time) as time, "depression_rating" FROM daily_log;`;
+        pool.query(queryText)
+            .then((results) => {
+                res.send(results.rows)
+                console.log(results.rows);
+
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 router.post('/', (req, res) => {

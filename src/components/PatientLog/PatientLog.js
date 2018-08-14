@@ -55,6 +55,12 @@ class AddItemPage extends Component {
             type: 'POST_LOG',
             payload: this.state.newLog
         })
+        // this.setState({
+        //     newLog: {
+        //         depression_rating: '',
+        //         activity: ''
+        //     }
+        // });
     }
 
     render() {

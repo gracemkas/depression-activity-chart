@@ -13,7 +13,8 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 // import InfoPage from './components/InfoPage/InfoPage';
 import PatientHome from './components/PatientHome/PatientHome';
 import ChooseTherapist from './components/PatientChooseTherapist/PatientChooseTherapist';
-import LogMood from './components/PatientLog/PatientLog'
+import LogMood from './components/PatientLog/PatientLog';
+import PatientGraph from './components/PatientGraph/PatientGraph';
 
 import './styles/main.css';
 
@@ -42,6 +43,10 @@ const App = () => (
         <Route
           path="/patientHome"
           component={PatientHome}
+        />
+        <Route
+          path="/patientGraph"
+          component={PatientGraph}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
