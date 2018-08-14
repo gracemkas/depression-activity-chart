@@ -1,27 +1,18 @@
 // import ReactChartkick, { LineChart } from 'react-chartkick'
 // import Chart from 'chart.js'
-import { VictoryBar, VictoryChart, VictoryTheme } from 'victory';
+import { VictoryBar, VictoryChart } from 'victory';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
-{/* <canvas id="myChart" width="400" height="400"></canvas>
-let ctx = document.getElementById("myChart"); */}
+import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
     user: state.user,
     dataList: state.dataList
 });
-
-// const data = [
-//     { quarter: 1, earnings: 13000 },
-//     { quarter: 2, earnings: 16500 },
-//     { quarter: 3, earnings: 14250 },
-//     { quarter: 4, earnings: 19000 }
-// ];
 
 
 
@@ -66,6 +57,10 @@ class PatientGraph extends Component {
                 }
             })
         }
+    }
+
+    home = () => {
+        this.props.history.push('patientHome');
     }
 
     // patientGraph = () => {
@@ -141,6 +136,8 @@ class PatientGraph extends Component {
                             y="depression_rating"
                         />
                     </VictoryChart>
+                    <p>Click on a bar to edit or delete it</p>
+                    <Button variant="raised" onClick={this.home}>Back</Button>
                 </div>
 
 

@@ -77,10 +77,7 @@ class AddItemPage extends Component {
                     <p>What are you doing right now?</p>
                     <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
                     <Button variant="raised" onClick={this.addLog}>Submit</Button>
-
-                    <Button variant="raised" onClick={this.home}>
-                        Back
-          </Button>
+                    <Button variant="raised" onClick={this.home}>Back</Button>
                 </div>
             );
         }
