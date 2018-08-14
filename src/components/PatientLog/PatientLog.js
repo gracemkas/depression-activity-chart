@@ -5,7 +5,7 @@ import Nav from '../../components/Nav/Nav';
 
 // import { fetchUser } from '../../redux/actions/userActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
+// import { triggerLogout } from '../../redux/actions/loginActions';
 import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
@@ -18,7 +18,7 @@ class AddItemPage extends Component {
         super(props)
 
         this.state = {
-            newItem: {
+            newLog: {
                 depression_rating: '',
                 activity: ''
             }
@@ -42,18 +42,18 @@ class AddItemPage extends Component {
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
-                newItem: {
-                    ...this.state.newItem,
+                newLog: {
+                    ...this.state.newLog,
                     [propertyName]: event.target.value
                 }
             })
         }
     }
 
-    addItem = () => {
+    addLog = () => {
         this.props.dispatch({
-            type: 'POST_ITEM',
-            payload: this.state.newItem
+            type: 'POST_LOG',
+            payload: this.state.newLog
         })
     }
 
@@ -70,7 +70,7 @@ class AddItemPage extends Component {
                     <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
                     <p>What are you doing right now?</p>
                     <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
-                    <Button variant="raised" onClick={this.addItem}>Submit</Button>
+                    <Button variant="raised" onClick={this.addLog}>Submit</Button>
 
                     <Button variant="raised" onClick={this.home}>
                         Back
