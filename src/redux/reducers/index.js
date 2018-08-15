@@ -12,33 +12,42 @@ const dataList = (state = [], action) => {
 };
 
 const updatedData = (state = {
-                          id: '',
-                          depression_rating: 0,
-                          activity: ''
-                    }, action) => {
+  id: '',
+  depression_rating: 0,
+  activity: ''
+}, action) => {
   switch (action.type) {
     case 'UPDATE_ID':
-    return {
-      id: action.payload
-    };
+      return {
+        id: action.payload
+      };
     case 'UPDATE_DEPRESSION':
-    return {
-      ...state,
-      depression_rating: action.payload.depression_rating,
-      activity: action.payload.activity
-    };
-  default:
-  return state;
-} 
+      return {
+        ...state,
+        depression_rating: action.payload.depression_rating,
+        activity: action.payload.activity
+      };
+    default:
+      return state;
+  }
 };
 
 const therapistName = (state = '', action) => {
   switch (action.type) {
-  case 'SHOW_THERAPIST':
-  return  action.payload
-default:
-return state;
-}
+    case 'SHOW_THERAPIST':
+      return action.payload
+    default:
+      return state;
+  }
+};
+
+const findTherapist = (state = '', action) => {
+  switch (action.type) {
+    case 'THERAPIST_FOUND':
+      return action.payload
+    default:
+      return state;
+  }
 };
 
 const store = combineReducers({
@@ -46,7 +55,8 @@ const store = combineReducers({
   login,
   dataList,
   updatedData,
-  therapistName
+  therapistName,
+  findTherapist
 });
 
 export default store;

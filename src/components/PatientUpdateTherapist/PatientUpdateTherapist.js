@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
     user: state.user,
-    updatedData: state.updatedData
+    findTherapist: state.findTherapist
 });
 
 class TherapistUpdate extends Component {
@@ -22,10 +22,9 @@ class TherapistUpdate extends Component {
         super(props)
 
         this.state = {
-            updateLog: {
-                id: this.props.updatedData.id,
-                depression_rating: '',
-                activity: ''
+            therapistSearch: {
+                first_name: '',
+                last_name: ''
             }
         }
     }
@@ -47,38 +46,27 @@ class TherapistUpdate extends Component {
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
-                updateLog: {
-                    ...this.state.updateLog,
+                therapistSearch: {
+                    ...this.state.therapistSearch,
                     [propertyName]: event.target.value
                 }
             })
         }
     }
 
-    deleteLog = () => {
-        if (!this.props.user.isLoading && this.props.user.userName === null) {
-            alert('You must be logged in to delete!')
-        } else {
-            this.props.dispatch({
-                type: 'DELETE_LOG', payload: this.state.updateLog.id
 
-            })
-        }
-    }
-
-
-    saveEdit = () => {
-        console.log('edit submit', this.state.updateLog)
+    findTherapist = () => {
+        console.log('edit submit', this.state.therapistSearch)
         this.props.dispatch({
-            type: 'UPDATE_LOG_DEPRESSION',
-            payload: this.state.updateLog
+            type: 'FIND_THERAPIST',
+            payload: this.state.therapistSearch
         })
     }
 
     render() {
         let content = null;
 
-        // let therapistListArray = this.props.therapistName.map((item, index) => {
+        // let therapistListArray = this.props.findTherapist.map((item, index) => {
         //     return <p key={index}>
         //         {item.first_name} {item.last_name}
         //     </p>
@@ -113,13 +101,12 @@ class TherapistUpdate extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {/* {feedbackMapArray} */}
                             <TableRow>
                                 <TableCell>
-                                    Test
+                                {this.props.findTherapist.first_name}
                             </TableCell>
                                 <TableCell>
-                                    Test
+                                {this.props.findTherapist.last_name}
                                 </TableCell>
                                 <TableCell>
                                     <Button variant="raised">Add</Button>
