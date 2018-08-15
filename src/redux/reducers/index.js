@@ -20,7 +20,13 @@ const updatedData = (state = {
     case 'UPDATE_ID':
     return {
       id: action.payload
-  };
+    };
+    case 'UPDATE_DEPRESSION':
+    return {
+      ...state,
+      depression_rating: action.payload.depression_rating,
+      activity: action.payload.activity
+    };
   default:
   return state;
 }

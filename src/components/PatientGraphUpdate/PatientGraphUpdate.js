@@ -5,7 +5,8 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    updatedData: state.updatedData
 });
 
 class GraphUpdate extends Component {
@@ -15,6 +16,7 @@ class GraphUpdate extends Component {
 
         this.state = {
             updateLog: {
+                id: this.props.updatedData.id,
                 depression_rating: '',
                 activity: ''
             }
@@ -38,28 +40,36 @@ class GraphUpdate extends Component {
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
-                newLog: {
-                    ...this.state.newLog,
+                updateLog: {
+                    ...this.state.updateLog,
                     [propertyName]: event.target.value
                 }
             })
         }
     }
 
+    deleteLog = () => {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+            alert('You must be logged in to delete!')
+        } else {
+            this.props.dispatch({
+                type: 'DELETE_LOG', payload: this.state.updateLog.id
 
-  saveEdit = () => {
-    console.log('edit submit', this.state.editItem)
-    this.props.dispatch({
-      type: 'UPDATE_ITEM',
-      payload: this.state.editItem,
-      id: this.state.id
-    })
-  }
+            })
+        }
+    }
+
+
+    saveEdit = () => {
+        console.log('edit submit', this.state.updateLog)
+        this.props.dispatch({
+            type: 'UPDATE_LOG_DEPRESSION',
+            payload: this.state.updateLog
+        })
+    }
 
     render() {
         let content = null;
-
-        console.log('state', this.state.newItem)
 
         if (this.props.user.userName) {
             content = (

@@ -34,6 +34,10 @@ class PatientHome extends Component {
       this.props.history.push('patientGraph');
   }
 
+  currentTherapist = () => {
+      this.props.history.push('patientCurrentTherapist');
+  }
+
   render() {
     let content = null;
 
@@ -49,7 +53,7 @@ class PatientHome extends Component {
           <Button variant="raised" onClick={this.patientGraph}>
             Daily Mood Graph
           </Button>
-          <Button variant="raised">
+          <Button variant="raised" onClick={this.currentTherapist}>
             Therapist
           </Button>
           <Button variant="raised" onClick={this.logout}>

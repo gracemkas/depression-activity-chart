@@ -30,17 +30,6 @@ class PatientGraph extends Component {
         }
     }
 
-    //   handleDelete = (item) => {
-    //     if (!this.props.user.isLoading && this.props.user.userName === null) {
-    //       alert('You must be logged in to delete!')
-    //     } else {
-    //       this.props.dispatch({
-    //         type: 'DELETE_ITEM', payload: item.id
-
-    //       })
-    //     }
-    //   }
-
 
     handleChangeFor = (propertyName) => {
         return (event) => {
@@ -77,7 +66,7 @@ class PatientGraph extends Component {
                                 target: "data",
                                 eventHandlers: {
                                     onClick: (evt, clickedProps) => {
-                                        console.log('clicked', clickedProps.index)
+                                        console.log('clicked', clickedProps.datum.id)
                                         // return [
                                         //   {
                                         //     target: "data",
@@ -93,7 +82,7 @@ class PatientGraph extends Component {
 
 
                                         this.props.dispatch({
-                                            type: 'UPDATE_LOG_ID', payload: clickedProps.index
+                                            type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
                                         })
                                     }
                                 }

@@ -3,11 +3,12 @@ import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import axios from '../../../node_modules/axios';
 
-
 export default function* rootSaga() {
   yield takeEvery('POST_LOG', postLog)
   yield takeEvery('GET_DATA', getData)
   yield takeEvery('UPDATE_LOG_ID', updateLog)
+  yield takeEvery('UPDATE_LOG_DEPRESSION', updateLogDepression)
+  yield takeEvery('DELETE_LOG', deleteLog)
   
   
   yield all([
@@ -53,5 +54,34 @@ function* updateLog(action) {
 
   } catch (err) {
     yield console.log(err);
+  }
+}
+
+function* updateLogDepression(action) {
+  try {
+    console.log('updateLogDepression saga');
+    // yield dispatch({
+    //   type: 'UPDATE_DEPRESSION',
+    //   payload: action.payload
+    // })
+
+    yield call(axios.put, `/api/depression/${action.payload.id}`, action.payload);
+
+  } catch (err) {
+    yield console.log(err);
+  }
+}
+
+function* deleteLog(action) {
+  console.log('deleteItem', action.payload);
+
+  try {
+    yield call(axios.delete, `/api/depression/${action.payload}`);
+    // yield dispatch({
+    //   type: 'GET_LIST'
+    // })
+  } catch (err) {
+    yield console.log(err);
+
   }
 }
