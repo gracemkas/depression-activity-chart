@@ -62,7 +62,7 @@ function* findTherapist(action) {
   try {
     console.log('findTherapist saga');
 
-    const therapistFind = yield call(axios.get, `/api/depression/find/${action.payload}`, action.payload)
+    const therapistFind = yield call(axios.put, `/api/depression/find/${action.payload}`, action.payload)
     
     yield dispatch({
       type: 'THERAPIST_FOUND',

@@ -20,9 +20,9 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/find/:name', (req, res) => {
+router.put('/find/:name', (req, res) => {
     if (req.isAuthenticated) {
-        console.log('req.body', req.params);
+        console.log('req.body', req.body);
         
         const queryText = `SELECT * FROM "therapist_info"
                             WHERE "first_name" ILIKE $1 
