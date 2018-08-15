@@ -29,15 +29,24 @@ const updatedData = (state = {
     };
   default:
   return state;
+} 
+};
+
+const therapistName = (state = '', action) => {
+  switch (action.type) {
+  case 'SHOW_THERAPIST':
+  return  action.payload
+default:
+return state;
 }
-  
-}
+};
 
 const store = combineReducers({
   user,
   login,
   dataList,
-  updatedData
+  updatedData,
+  therapistName
 });
 
 export default store;

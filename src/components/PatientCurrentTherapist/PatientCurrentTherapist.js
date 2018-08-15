@@ -1,4 +1,3 @@
-import { VictoryBar, VictoryChart } from 'victory';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
@@ -7,10 +6,10 @@ import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
     user: state.user,
-    dataList: state.dataList
+    therapistName: state.therapistName
 });
 
-class PatientGraph extends Component {
+class CurrentTherapist extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,8 +19,10 @@ class PatientGraph extends Component {
     }
 
     componentDidMount() {
+        //screen will start at the top
+        window.scrollTo(0,0);
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER })
-        this.props.dispatch({ type: 'GET_DATA' })
+        this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
     }
 
     componentDidUpdate() {
@@ -46,52 +47,29 @@ class PatientGraph extends Component {
         this.props.history.push('patientHome');
     }
 
+    changeTherapist = () => {
+        this.props.history.push('therapistUpdate');
+    }
+    
+
     render() {
         let content = null;
+        // console.log('therapistName', this.props.therapistName[0].first_name);
+        
+
+        // let therapistListArray = this.props.therapistName.map((item, index) => {
+        //     return <p key={index}>
+        //         {item.first_name} {item.last_name}
+        //     </p>
+        //   })
 
         if (this.props.user.userName) {
-            console.log('state', this.state);
-            const data = this.props.dataList;
+            let firstName = this.props.therapistName;
             content = (
                 <div>
                     <h2>Current Therapist</h2>
-                    <VictoryChart
-                        maxDomain={{ y: 10 }}
-                        minDomain={{ y: 0 }}
-                        domainPadding={{ x: 15 }}
-                    >
-                        <VictoryBar data={data}
-                            style={{ data: { fill: "#DF744A" } }}
-                            events={[{
-                                target: "data",
-                                eventHandlers: {
-                                    onClick: (evt, clickedProps) => {
-                                        console.log('clicked', clickedProps.datum.id)
-                                        // return [
-                                        //   {
-                                        //     target: "data",
-                                        //     // mutation: (props) => {
-                                        //     //   const fill = props.style && props.style.fill;
-                                        //     //   return fill === "black" ? null : { style: { fill: "black" } };
-                                        //     // }
-                                        //     patientGraph: () => {
-                                        this.props.history.push('patientGraphUpdate');
-                                        // }
-                                        //   }
-                                        // ];
-
-
-                                        this.props.dispatch({
-                                            type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
-                                        })
-                                    }
-                                }
-                            }]}
-                            x="time"
-                            y="depression_rating"
-                        />
-                    </VictoryChart>
-                    <p>Click on a bar to edit or delete it</p>
+                    <p>Therapist Name: {firstName.first_name} {firstName.last_name}</p>
+                    <Button variant="raised" onClick={this.changeTherapist}>Change Therapist</Button>
                     <Button variant="raised" onClick={this.home}>Back</Button>
                 </div>
             );
@@ -107,4 +85,4 @@ class PatientGraph extends Component {
     }
 }
 
-export default connect(mapStateToProps)(PatientGraph);
+export default connect(mapStateToProps)(CurrentTherapist);

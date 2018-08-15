@@ -20,6 +20,27 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/therapist', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log('userid', req.user.id);
+        
+        const queryText = `SELECT "therapist_info"."first_name", "therapist_info"."last_name" FROM "patient_info"
+        JOIN "therapist_info" ON "patient_info"."therapist_id" = "therapist_info"."id"
+        WHERE "patient_info"."person_id" = $1;`;
+        pool.query(queryText, [req.user.id])
+            .then((results) => {
+                res.send(results.rows[0])
+                console.log(results.rows);
+
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 router.post('/', (req, res) => {
     console.log('got to post', req.body);
     if (req.isAuthenticated) {

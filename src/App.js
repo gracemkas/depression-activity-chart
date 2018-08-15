@@ -17,6 +17,7 @@ import LogMood from './components/PatientLog/PatientLog';
 import PatientGraph from './components/PatientGraph/PatientGraph';
 import GraphUpdate from './components/PatientGraphUpdate/PatientGraphUpdate';
 import CurrentTherapist from './components/PatientCurrentTherapist/PatientCurrentTherapist';
+import TherapistUpdate from './components/PatientUpdateTherapist/PatientUpdateTherapist';
 
 import './styles/main.css';
 
@@ -57,6 +58,10 @@ const App = () => (
         <Route
           path="/patientCurrentTherapist"
           component={CurrentTherapist}
+        />
+        <Route
+          path="/therapistUpdate"
+          component={TherapistUpdate}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

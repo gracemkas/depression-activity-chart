@@ -9,6 +9,7 @@ export default function* rootSaga() {
   yield takeEvery('UPDATE_LOG_ID', updateLog)
   yield takeEvery('UPDATE_LOG_DEPRESSION', updateLogDepression)
   yield takeEvery('DELETE_LOG', deleteLog)
+  yield takeEvery('GET_CURRENT_THERAPIST', getCurrentTherapist)
   
   
   yield all([
@@ -36,6 +37,20 @@ function* getData() {
     yield dispatch({
       type: 'GET_LIST',
       payload: dataResponse.data
+    })
+  } catch (err) {
+    yield console.log(err);
+  }
+}
+
+function* getCurrentTherapist() {
+  try {
+    console.log('getCurrentTherapist saga');
+
+    const therapistName = yield call(axios.get, '/api/depression/therapist')
+    yield dispatch({
+      type: 'SHOW_THERAPIST',
+      payload: therapistName.data
     })
   } catch (err) {
     yield console.log(err);
