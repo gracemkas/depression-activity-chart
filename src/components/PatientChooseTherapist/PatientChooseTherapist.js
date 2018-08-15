@@ -65,7 +65,7 @@ class ChooseTherapist extends Component {
           <p>
             Look up your therapist by name:
           </p>
-          <input placeholder="First Name" onChange={this.handleChangeFor("first_name")}/>
+          <input classes="" placeholder="First Name" onChange={this.handleChangeFor("first_name")}/>
           <input placeholder="Last Name" onChange={this.handleChangeFor("last_name")}/>
           <button onClick={this.findTherapist}>Submit</button>
           <p>
@@ -88,7 +88,17 @@ class ChooseTherapist extends Component {
                         </TableHead>
                         <TableBody>
                             {/* {feedbackMapArray} */}
-                            
+                            <TableRow>
+                                <TableCell>
+                                    Test
+                            </TableCell>
+                                <TableCell>
+                                    Test
+                                </TableCell>
+                                <TableCell>
+                                    <Button variant="raised">Add</Button>
+                            </TableCell>
+                            </TableRow>
                         </TableBody>
                     </Table>
                 </Paper>

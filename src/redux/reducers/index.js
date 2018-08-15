@@ -11,10 +11,27 @@ const dataList = (state = [], action) => {
   }
 };
 
+const updatedData = (state = {
+                          id: '',
+                          depression_rating: 0,
+                          activity: ''
+                    }, action) => {
+  switch (action.type) {
+    case 'UPDATE_ID':
+    return {
+      id: action.payload
+  };
+  default:
+  return state;
+}
+  
+}
+
 const store = combineReducers({
   user,
   login,
-  dataList
+  dataList,
+  updatedData
 });
 
 export default store;

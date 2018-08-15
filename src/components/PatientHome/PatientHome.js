@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Nav from '../../components/Nav/Nav';
 import Button from '@material-ui/core/Button';
-
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 
@@ -42,9 +40,7 @@ class PatientHome extends Component {
     if (this.props.user.userName) {
       content = (
         <div>
-          <h4
-            id="welcome"
-          >
+          <h4 id="welcome">
             Welcome, { this.props.user.userName }!
           </h4>
           <Button variant="raised" onClick={this.logMood}>
@@ -72,5 +68,4 @@ class PatientHome extends Component {
   }
 }
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(PatientHome);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
@@ -15,7 +14,7 @@ class GraphUpdate extends Component {
         super(props)
 
         this.state = {
-            newLog: {
+            updateLog: {
                 depression_rating: '',
                 activity: ''
             }
@@ -32,8 +31,8 @@ class GraphUpdate extends Component {
         }
     }
 
-    home = () => {
-        this.props.history.push('patientHome');
+    graph = () => {
+        this.props.history.push('patientGraph');
     }
 
     handleChangeFor = (propertyName) => {
@@ -48,7 +47,7 @@ class GraphUpdate extends Component {
     }
 
 
-  editSubmit = () => {
+  saveEdit = () => {
     console.log('edit submit', this.state.editItem)
     this.props.dispatch({
       type: 'UPDATE_ITEM',
@@ -65,16 +64,14 @@ class GraphUpdate extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <h1>Record Your Mood</h1>
-                    <p>Rate the severity of your depressed mood from 0 (none) to 10 (severe) </p>
+                    <h1>Edit or Delete Log</h1>
+                    <p>Edit your depressed mood rating from 0 (none) to 10 (severe) </p>
                     <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
-                    <p>What are you doing right now?</p>
+                    <p>Edit the activity</p>
                     <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
-                    <Button variant="raised" onClick={this.addLog}>Submit</Button>
-
-                    <Button variant="raised" onClick={this.home}>
-                        Back
-          </Button>
+                    <Button variant="raised" onClick={this.saveEdit}>Save</Button>
+                    <Button variant="raised" onClick={this.deleteLog}>Delete</Button>
+                    <Button variant="raised" onClick={this.graph}>Back</Button>
                 </div>
             );
         }

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Nav from '../../components/Nav/Nav';
-
-// import { fetchUser } from '../../redux/actions/userActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-// import { triggerLogout } from '../../redux/actions/loginActions';
 import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
@@ -65,9 +61,6 @@ class AddItemPage extends Component {
 
     render() {
         let content = null;
-
-        console.log('state', this.state.newItem)
-
         if (this.props.user.userName) {
             content = (
                 <div>
@@ -91,5 +84,4 @@ class AddItemPage extends Component {
     }
 }
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(AddItemPage);
