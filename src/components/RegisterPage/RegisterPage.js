@@ -71,7 +71,11 @@ class RegisterPage extends Component {
     return (<span />);
   }
 
+ 
+  
+
   render() {
+    console.log('type', this.state.role);
     return (
       <div>
         {this.renderAlert()}

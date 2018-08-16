@@ -16,6 +16,8 @@ const mapStateToProps = state => ({
     foundTherapist: state.findTherapist
 });
 
+// let therapistListArray: [];
+
 class TherapistUpdate extends Component {
 
     constructor(props) {
@@ -32,7 +34,7 @@ class TherapistUpdate extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         console.log('therapist', this.props);
-        
+
     }
 
     componentDidUpdate() {
@@ -73,18 +75,26 @@ class TherapistUpdate extends Component {
             type: 'UPDATE_THERAPIST',
             payload: this.props.foundTherapist
         })
-        this.props.foundTherapist.first_name = '';
-        this.props.foundTherapist.last_name = '';
+        // therapistListArray = [];
         this.props.history.push('patientCurrentTherapist');
     }
 
     render() {
         let content = null;
-
+        
         let therapistListArray = this.props.foundTherapist.map((item, index) => {
-            return <p key={index}>
-                {item.first_name} {item.last_name}
-            </p>
+            return <TableRow key={index}>
+                <TableCell>
+                    {item.first_name}
+                </TableCell>
+                <TableCell>
+                    {item.last_name}
+                </TableCell>
+                <TableCell>
+                    <Button variant="raised" onClick={() => this.updateTherapist(this.props.item)}>Add</Button>
+                </TableCell>
+            </TableRow>
+
         })
 
         if (this.props.user.userName) {
@@ -116,17 +126,7 @@ class TherapistUpdate extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell>
-                                        {this.props.foundTherapist.first_name}
-                                    </TableCell>
-                                    <TableCell>
-                                        {this.props.foundTherapist.last_name}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button variant="raised" onClick={() => this.updateTherapist(this.props.foundTherapist)}>Add</Button>
-                                    </TableCell>
-                                </TableRow>
+                                {therapistListArray}
                             </TableBody>
                         </Table>
                     </Paper>

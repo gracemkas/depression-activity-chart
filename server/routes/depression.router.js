@@ -5,8 +5,9 @@ const moment = require('moment');
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated) {
-        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log;`;
-        pool.query(queryText)
+        const todayDate = moment().format('L');
+        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" = $1;`;
+        pool.query(queryText, [todayDate])
             .then((results) => {
                 res.send(results.rows)
                 console.log(results.rows);
@@ -29,6 +30,25 @@ router.put('/find/:name', (req, res) => {
                             WHERE "first_name" ILIKE $1 
                             AND "last_name" ILIKE $2;`;
         pool.query(queryText, [req.body.first_name, req.body.last_name])
+            .then((results) => {
+                res.send(results.rows)
+                console.log(results.rows);
+
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+router.put('/date/:date', (req, res) => {
+    if (req.isAuthenticated) {
+        console.log('req.body', req.body);
+        
+        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" = $1;`;
+        pool.query(queryText, [req.body])
             .then((results) => {
                 res.send(results.rows)
                 console.log(results.rows);

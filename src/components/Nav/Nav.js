@@ -10,11 +10,6 @@ const Nav = () => (
             Patient Home
           </Link>
         </li>
-        <li>
-          <Link to="/chooseTherapist">
-            Choose Therapist
-          </Link>
-        </li>
       </ul>
     </div>
   </div>

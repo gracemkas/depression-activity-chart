@@ -5,12 +5,24 @@ import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
 const moment = require('moment');
 
 const mapStateToProps = state => ({
     user: state.user,
     dataList: state.dataList
 });
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 200,
+    },
+  });
 
 class PatientGraph extends Component {
     constructor(props) {
@@ -103,14 +115,18 @@ class PatientGraph extends Component {
                             y="depression_rating"
                         />
                     </VictoryChart>
+                    {/* className={this.props.classes.} */}
                     <p>Click on a bar to edit or delete it</p>
-                    <Button variant="raised" onClick={this.home}>Back</Button>
+                    <form className={this.props.classes.container} noValidate>
                     <TextField
                         id="date"
-                        label="Day"
+                        label="Choose a Date"
                         type="date"
                         defaultValue={date}
                     />
+                    </form>
+                    <Button variant="raised" onClick={this.home}>Submit</Button>
+                    <Button variant="raised" onClick={this.home}>Back</Button>
                 </div>
             );
         }
@@ -124,5 +140,6 @@ class PatientGraph extends Component {
 
     }
 }
+const styleGraph = withStyles(styles)(PatientGraph)
 
-export default connect(mapStateToProps)(PatientGraph);
+export default  connect(mapStateToProps)(styleGraph);
