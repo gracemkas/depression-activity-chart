@@ -57,6 +57,7 @@ class AddItemPage extends Component {
         //         activity: ''
         //     }
         // });
+        this.props.history.push('patientHome');
     }
 
     render() {

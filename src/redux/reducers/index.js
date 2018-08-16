@@ -41,7 +41,7 @@ const therapistName = (state = '', action) => {
   }
 };
 
-const findTherapist = (state = '', action) => {
+const findTherapist = (state = [], action) => {
   switch (action.type) {
     case 'THERAPIST_FOUND':
       return action.payload

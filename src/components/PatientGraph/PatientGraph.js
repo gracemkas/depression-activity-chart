@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+const moment = require('moment');
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -51,6 +53,10 @@ class PatientGraph extends Component {
 
         if (this.props.user.userName) {
             console.log('state', this.state);
+            console.log('date', moment().format());
+            
+            const date = moment().format().split('T', 1);
+            console.log('new date', date);
             const data = this.props.dataList;
             content = (
                 <div>
@@ -58,8 +64,14 @@ class PatientGraph extends Component {
                     <VictoryChart
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
+                        // maxDomain={{ x: '10:00' }}
+                        // minDomain={{ x: '9:00' }}
                         domainPadding={{ x: 15 }}
+                    // scale={{ x: "time" }}
                     >
+                        {/* <VictoryAxis
+                            tickFormat={(x) => new Date(x).getHours ()}
+                        /> */}
                         <VictoryBar data={data}
                             style={{ data: { fill: "#DF744A" } }}
                             events={[{
@@ -93,6 +105,12 @@ class PatientGraph extends Component {
                     </VictoryChart>
                     <p>Click on a bar to edit or delete it</p>
                     <Button variant="raised" onClick={this.home}>Back</Button>
+                    <TextField
+                        id="date"
+                        label="Day"
+                        type="date"
+                        defaultValue={date}
+                    />
                 </div>
             );
         }

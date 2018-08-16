@@ -5,7 +5,7 @@ const moment = require('moment');
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated) {
-        const queryText = `SELECT EXTRACT (HOUR FROM time) as time, "depression_rating", "id" FROM daily_log;`;
+        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log;`;
         pool.query(queryText)
             .then((results) => {
                 res.send(results.rows)
@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
     }
 });
 
+//should be a get
 router.put('/find/:name', (req, res) => {
     if (req.isAuthenticated) {
         console.log('req.body', req.body);
@@ -29,7 +30,7 @@ router.put('/find/:name', (req, res) => {
                             AND "last_name" ILIKE $2;`;
         pool.query(queryText, [req.body.first_name, req.body.last_name])
             .then((results) => {
-                res.send(results.rows[0])
+                res.send(results.rows)
                 console.log(results.rows);
 
             }).catch((err) => {
@@ -87,6 +88,21 @@ router.put('/:id', (req, res) => {
     if (req.isAuthenticated) {
         const queryText = `Update "daily_log" SET "depression_rating" = $1, "activity" = $2 WHERE id=$3`;
         pool.query(queryText, [req.body.depression_rating, req.body.activity, req.params.id])
+            .then(() => { res.sendStatus(200); })
+            .catch((err) => {
+                console.log('Error updating', err);
+                res.sendStatus(500);
+            });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+router.put('/therapist/:id', (req, res) => {
+    console.log('got to put', req.body)
+    if (req.isAuthenticated) {
+        const queryText = `Update "patient_info" SET "therapist_id" = $1 WHERE "person_id" = $2;`;
+        pool.query(queryText, [req.params.id, req.user.id])
             .then(() => { res.sendStatus(200); })
             .catch((err) => {
                 console.log('Error updating', err);

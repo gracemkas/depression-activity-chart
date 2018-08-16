@@ -11,6 +11,7 @@ export default function* rootSaga() {
   yield takeEvery('DELETE_LOG', deleteLog)
   yield takeEvery('GET_CURRENT_THERAPIST', getCurrentTherapist)
   yield takeEvery('FIND_THERAPIST', findTherapist)
+  yield takeEvery('UPDATE_THERAPIST', updateTherapist)
   
   
   yield all([
@@ -80,9 +81,7 @@ function* updateLog(action) {
       type: 'UPDATE_ID',
       payload: action.payload
     })
-
     // const dataResponse = yield call(axios.get, '/api/depression')
-
   } catch (err) {
     yield console.log(err);
   }
@@ -91,13 +90,22 @@ function* updateLog(action) {
 function* updateLogDepression(action) {
   try {
     console.log('updateLogDepression saga');
-    // yield dispatch({
-    //   type: 'UPDATE_DEPRESSION',
-    //   payload: action.payload
-    // })
-
     yield call(axios.put, `/api/depression/${action.payload.id}`, action.payload);
+    yield dispatch({
+      type: 'GET_DATA'
+    })
+  } catch (err) {
+    yield console.log(err);
+  }
+}
 
+function* updateTherapist(action) {
+  try {
+    console.log('updateTherapist saga');
+    yield call(axios.put, `/api/depression/therapist/${action.payload.id}`, );
+    yield dispatch({
+      type: 'GET_CURRENT_THERAPIST'
+    })
   } catch (err) {
     yield console.log(err);
   }
@@ -108,9 +116,9 @@ function* deleteLog(action) {
 
   try {
     yield call(axios.delete, `/api/depression/${action.payload}`);
-    // yield dispatch({
-    //   type: 'GET_LIST'
-    // })
+    yield dispatch({
+      type: 'GET_DATA'
+    })
   } catch (err) {
     yield console.log(err);
 

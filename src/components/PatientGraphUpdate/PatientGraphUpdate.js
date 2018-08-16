@@ -56,6 +56,7 @@ class GraphUpdate extends Component {
                 type: 'DELETE_LOG', payload: this.state.updateLog.id
 
             })
+            this.props.history.push('patientGraph');
         }
     }
 
@@ -66,6 +67,7 @@ class GraphUpdate extends Component {
             type: 'UPDATE_LOG_DEPRESSION',
             payload: this.state.updateLog
         })
+        this.props.history.push('patientGraph');
     }
 
     render() {

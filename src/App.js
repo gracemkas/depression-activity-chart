@@ -22,7 +22,7 @@ import TherapistUpdate from './components/PatientUpdateTherapist/PatientUpdateTh
 import './styles/main.css';
 
 const App = () => (
-  <div>
+  <div className="grid-container">
     <Header title="Project Base" />
     <Router>
       <Switch>

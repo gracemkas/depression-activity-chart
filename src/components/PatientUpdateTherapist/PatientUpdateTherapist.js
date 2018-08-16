@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
     user: state.user,
-    findTherapist: state.findTherapist
+    foundTherapist: state.findTherapist
 });
 
 class TherapistUpdate extends Component {
@@ -31,6 +31,8 @@ class TherapistUpdate extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        console.log('therapist', this.props);
+        
     }
 
     componentDidUpdate() {
@@ -40,6 +42,8 @@ class TherapistUpdate extends Component {
     }
 
     currentTherapist = () => {
+        this.props.foundTherapist.first_name = '';
+        this.props.foundTherapist.last_name = '';
         this.props.history.push('patientCurrentTherapist');
     }
 
@@ -56,21 +60,32 @@ class TherapistUpdate extends Component {
 
 
     findTherapist = () => {
-        console.log('edit submit', this.state.therapistSearch)
+        console.log('find', this.state.therapistSearch)
         this.props.dispatch({
             type: 'FIND_THERAPIST',
             payload: this.state.therapistSearch
         })
     }
 
+    updateTherapist = () => {
+        console.log('edit', this.props.foundTherapist)
+        this.props.dispatch({
+            type: 'UPDATE_THERAPIST',
+            payload: this.props.foundTherapist
+        })
+        this.props.foundTherapist.first_name = '';
+        this.props.foundTherapist.last_name = '';
+        this.props.history.push('patientCurrentTherapist');
+    }
+
     render() {
         let content = null;
 
-        // let therapistListArray = this.props.findTherapist.map((item, index) => {
-        //     return <p key={index}>
-        //         {item.first_name} {item.last_name}
-        //     </p>
-        // })
+        let therapistListArray = this.props.foundTherapist.map((item, index) => {
+            return <p key={index}>
+                {item.first_name} {item.last_name}
+            </p>
+        })
 
         if (this.props.user.userName) {
             content = (
@@ -82,39 +97,39 @@ class TherapistUpdate extends Component {
                     <Button variant="raised" onClick={this.findTherapist}>Search</Button>
                     <Button variant="raised" onClick={this.currentTherapist}>Back</Button>
 
-                              <p>
-            Results:
-          </p>
-          <Paper>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>
-                                    First Name
+                    <p>
+                        Results:
+                    </p>
+                    <Paper>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>
+                                        First Name
                             </TableCell>
-                                <TableCell>
-                                    Last Name
+                                    <TableCell>
+                                        Last Name
                                 </TableCell>
-                                <TableCell>
-                                    Add Therapist
+                                    <TableCell>
+                                        Add Therapist
                             </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell>
-                                {this.props.findTherapist.first_name}
-                            </TableCell>
-                                <TableCell>
-                                {this.props.findTherapist.last_name}
-                                </TableCell>
-                                <TableCell>
-                                    <Button variant="raised">Add</Button>
-                            </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </Paper>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>
+                                        {this.props.foundTherapist.first_name}
+                                    </TableCell>
+                                    <TableCell>
+                                        {this.props.foundTherapist.last_name}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button variant="raised" onClick={() => this.updateTherapist(this.props.foundTherapist)}>Add</Button>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </Paper>
                 </div>
             );
         }
