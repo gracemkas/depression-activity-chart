@@ -5,15 +5,18 @@ import Button from '@material-ui/core/Button';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import Grid from '@material-ui/core/Grid';
+import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
 
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    therapistName: state.therapistName
 });
 
 class PatientHome extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
     }
 
     componentDidUpdate() {
@@ -41,10 +44,18 @@ class PatientHome extends Component {
 
     render() {
         let content = null;
+        console.log('therapist', this.props.therapistName.first_name)
 
         if (this.props.user.userName) {
-            content = (
+            if (this.props.therapistName.first_name === undefined){
+            content = 
                 <div>
+                    <PatientChooseTherapist />
+                </div>
+            } else {
+                content = 
+                <div>
+                    <Nav />
                     <Grid container justify="center" id="welcome">
                         <Grid item xs={8}>
                             Welcome, {this.props.user.userName}!
@@ -76,12 +87,13 @@ class PatientHome extends Component {
 
                     </Grid>
                 </div>
-            );
+            }
+            // );
         }
 
         return (
             <div>
-                <Nav />
+                
                 {content}
             </div>
         );

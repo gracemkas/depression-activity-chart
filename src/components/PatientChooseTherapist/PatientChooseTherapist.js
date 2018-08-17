@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import Table from '@material-ui/core/Table';
@@ -65,27 +64,36 @@ class ChooseTherapist extends Component {
         })
     }
 
-    updateTherapist = () => {
+    addTherapist = () => {
         console.log('edit', this.props.foundTherapist)
         this.props.dispatch({
-            type: 'UPDATE_THERAPIST',
+            type: 'ADD_THERAPIST',
             payload: this.props.foundTherapist
         })
-        this.props.foundTherapist.first_name = '';
-        this.props.foundTherapist.last_name = '';
-        this.props.history.push('patientCurrentTherapist');
+        this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
+
+        // this.props.history.push('patientHome');
     }
 
     render() {
         let content = null;
 
-        // let therapistListArray = this.props.findTherapist.map((item, index) => {
-        //     return <p key={index}>
-        //         {item.first_name} {item.last_name}
-        //     </p>
-        // })
+        let therapistListArray = this.props.foundTherapist.map((item, index) => {
+          return <TableRow key={index}>
+              <TableCell>
+                  {item.first_name}
+              </TableCell>
+              <TableCell>
+                  {item.last_name}
+              </TableCell>
+              <TableCell>
+                  <Button variant="raised" onClick={() => this.addTherapist(this.props.item)}>Add</Button>
+              </TableCell>
+          </TableRow>
 
-        // if (this.props.user.userName) {
+      })
+
+        if (this.props.user.userName) {
             content = (
                 <div>
                     <h2>Choose a New Therapist</h2>
@@ -93,7 +101,7 @@ class ChooseTherapist extends Component {
                     <input placeholder="First Name" onChange={this.handleChangeFor("first_name")} />
                     <input placeholder="Last Name" onChange={this.handleChangeFor("last_name")} />
                     <Button variant="raised" onClick={this.findTherapist}>Search</Button>
-                    <Button variant="raised" onClick={this.currentTherapist}>Back</Button>
+                    {/* <Button variant="raised" onClick={this.currentTherapist}>Back</Button> */}
 
                     <p>
                         Results:
@@ -114,27 +122,16 @@ class ChooseTherapist extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell>
-                                        {this.props.foundTherapist.first_name}
-                                    </TableCell>
-                                    <TableCell>
-                                        {this.props.foundTherapist.last_name}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button variant="raised" onClick={() => this.updateTherapist(this.props.foundTherapist)}>Add</Button>
-                                    </TableCell>
-                                </TableRow>
+                                {therapistListArray}
                             </TableBody>
                         </Table>
                     </Paper>
                 </div>
             );
-        // }
+        }
 
         return (
             <div>
-                <Nav />
                 {content}
             </div>
         );

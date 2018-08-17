@@ -32,11 +32,11 @@ class RegisterPage extends Component {
       axios.post('/api/user/register/', body)
         .then((response) => {
           if (response.status === 201) {
-            if (this.state.role === 'patient'){
-            this.props.history.push('/chooseTherapist');
-            } else {
+            // if (this.state.role === 'patient'){
+            // this.props.history.push('/chooseTherapist');
+            // } else {
               this.props.history.push('/home')
-            }
+            // }
           } else {
             this.setState({
               message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',

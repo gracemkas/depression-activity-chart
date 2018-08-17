@@ -17,7 +17,7 @@ export const triggerLogin = (username, password) => ({
   type: LOGIN_ACTIONS.LOGIN,
   payload: {
     username,
-    password,
+    password
   },
 });
 

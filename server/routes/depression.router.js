@@ -104,6 +104,7 @@ router.get('/therapist', (req, res) => {
     }
 });
 
+
 router.post('/', (req, res) => {
     console.log('got to post', req.body);
     if (req.isAuthenticated) {
@@ -113,6 +114,25 @@ router.post('/', (req, res) => {
         const time = moment().format('h:mm a');
         const queryText = `INSERT INTO "daily_log" ("depression_rating", "activity", "date", "time", "patient_id") VALUES ($1,$2,$3,$4,$5)`
         pool.query(queryText, [newLog.depression_rating, newLog.activity, date, time, req.user.id])
+            .then(() => {
+                res.sendStatus(200);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.sendStatus(500)
+            })
+    } else {
+        res.sendStatus(403);
+    }
+})
+
+//not working yet
+router.post('/addtherapist', (req, res) => {
+    console.log('got to post add therapist', req.body[0].id);
+    if (req.isAuthenticated) {
+        const newTherapist = req.body[0].id
+        const queryText = `INSERT INTO "patient_info" ("person_id", "therapist_id") VALUES ($1, $2);`
+        pool.query(queryText, [req.user.id, newTherapist])
             .then(() => {
                 res.sendStatus(200);
             })
