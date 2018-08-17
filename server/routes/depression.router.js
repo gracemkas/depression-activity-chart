@@ -5,9 +5,30 @@ const moment = require('moment');
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated) {
-        const todayDate = moment().format('L');
+        // const todayDate = moment().format('L');
+        const todayDate = moment().format().split('T', 1);
         const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" = $1;`;
         pool.query(queryText, [todayDate])
+            .then((results) => {
+                res.send(results.rows)
+                console.log(results.rows);
+
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+router.put('/date/:date', (req, res) => {
+    if (req.isAuthenticated) {
+        // const todayDate = moment().format('L');
+        // const todayDate = moment().format().split('T', 1);
+        console.log('req.body put', req.body)
+        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" ILIKE $1;`;
+        pool.query(queryText, [req.body])
             .then((results) => {
                 res.send(results.rows)
                 console.log(results.rows);
@@ -87,7 +108,8 @@ router.post('/', (req, res) => {
     console.log('got to post', req.body);
     if (req.isAuthenticated) {
         const newLog = req.body
-        const date = moment().format('L');
+        // const date = moment().format('L');
+        const date = moment().format().split('T', 1);
         const time = moment().format('h:mm a');
         const queryText = `INSERT INTO "daily_log" ("depression_rating", "activity", "date", "time", "patient_id") VALUES ($1,$2,$3,$4,$5)`
         pool.query(queryText, [newLog.depression_rating, newLog.activity, date, time, req.user.id])

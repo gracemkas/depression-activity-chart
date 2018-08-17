@@ -6,10 +6,14 @@ const dataList = (state = [], action) => {
   switch (action.type) {
     case 'GET_LIST':
       return action.payload
+    case 'STORE_NEW_DATE':
+      return action.payload
     default:
       return state;
   }
 };
+
+
 
 const updatedData = (state = {
   id: '',

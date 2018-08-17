@@ -28,8 +28,9 @@ class PatientGraph extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            // time: '',
-            // depression_rating: ''
+            newChoosenDate: {
+                choosenDate: ''
+            }
         }
     }
 
@@ -48,8 +49,8 @@ class PatientGraph extends Component {
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
-                editItem: {
-                    ...this.state.editItem,
+                newChoosenDate: {
+                    ...this.state.newChoosenDate,
                     [propertyName]: event.target.value
                 }
             })
@@ -58,6 +59,14 @@ class PatientGraph extends Component {
 
     home = () => {
         this.props.history.push('patientHome');
+    }
+
+    changeDate = () => {
+        console.log('date change', this.state.newChoosenDate.choosenDate)
+        this.props.dispatch({
+            type: 'CHANGE_DATE',
+            payload: this.state.newChoosenDate.choosenDate.split(':', 1)
+        })
     }
 
     render() {
@@ -72,7 +81,7 @@ class PatientGraph extends Component {
             const data = this.props.dataList;
             content = (
                 <div>
-                    <h2>Graph of Today's Mood</h2>
+                    <h2>Graph of Daily Mood</h2>
                     <VictoryChart
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
@@ -118,14 +127,15 @@ class PatientGraph extends Component {
                     {/* className={this.props.classes.} */}
                     <p>Click on a bar to edit or delete it</p>
                     <form className={this.props.classes.container} noValidate>
-                    <TextField
+                    <TextField 
                         id="date"
                         label="Choose a Date"
                         type="date"
                         defaultValue={date}
+                        onChange={this.handleChangeFor("choosenDate")}
                     />
                     </form>
-                    <Button variant="raised" onClick={this.home}>Submit</Button>
+                    <Button variant="raised" onClick={this.changeDate}>Submit</Button>
                     <Button variant="raised" onClick={this.home}>Back</Button>
                 </div>
             );

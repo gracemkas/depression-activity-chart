@@ -12,6 +12,7 @@ export default function* rootSaga() {
   yield takeEvery('GET_CURRENT_THERAPIST', getCurrentTherapist)
   yield takeEvery('FIND_THERAPIST', findTherapist)
   yield takeEvery('UPDATE_THERAPIST', updateTherapist)
+  yield takeEvery('CHANGE_DATE', changeDate)
   
   
   yield all([
@@ -91,6 +92,19 @@ function* updateLogDepression(action) {
     yield call(axios.put, `/api/depression/${action.payload.id}`, action.payload);
     yield dispatch({
       type: 'GET_DATA'
+    })
+  } catch (err) {
+    yield console.log(err);
+  }
+}
+
+function* changeDate(action) {
+  try {
+    console.log('changeDate saga');
+    const newDate = yield call(axios.put, `/api/depression/date/${action.payload}`, action.payload);
+    yield dispatch({
+      type: 'STORE_NEW_DATE',
+      payload: newDate.data
     })
   } catch (err) {
     yield console.log(err);
