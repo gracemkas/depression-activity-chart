@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
     if (req.isAuthenticated) {
         // const todayDate = moment().format('L');
         const todayDate = moment().format().split('T', 1);
-        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" = $1;`;
-        pool.query(queryText, [todayDate])
+        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" = $1 AND "patient_id" = $2;`;
+        pool.query(queryText, [todayDate, req.user.id])
             .then((results) => {
                 res.send(results.rows)
                 console.log(results.rows);
@@ -27,8 +27,8 @@ router.put('/date/:date', (req, res) => {
         // const todayDate = moment().format('L');
         // const todayDate = moment().format().split('T', 1);
         console.log('req.body put', req.body)
-        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" ILIKE $1;`;
-        pool.query(queryText, [req.body])
+        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" ILIKE $1 AND "patient_id" = $2;;`;
+        pool.query(queryText, [req.body, req.user.id])
             .then((results) => {
                 res.send(results.rows)
                 console.log(results.rows);
