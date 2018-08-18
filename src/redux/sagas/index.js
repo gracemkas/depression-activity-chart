@@ -126,8 +126,8 @@ function* changeDate(action) {
 
 function* updateTherapist(action) {
   try {
-    console.log('updateTherapist saga');
-    yield call(axios.put, `/api/depression/therapist/${action.payload.id}`, );
+    console.log('updateTherapist saga', action.payload);
+    yield call(axios.put, `/api/depression/therapist/${action.payload.id}`, action.payload);
     yield dispatch({
       type: 'GET_CURRENT_THERAPIST'
     })

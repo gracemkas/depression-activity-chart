@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
+import {Delete, Save} from '@material-ui/icons';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -81,8 +82,8 @@ class GraphUpdate extends Component {
                     <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
                     <p>Edit the activity</p>
                     <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
-                    <Button variant="raised" onClick={this.saveEdit}>Save</Button>
-                    <Button variant="raised" onClick={this.deleteLog}>Delete</Button>
+                    <Button variant="raised" onClick={this.saveEdit}><Save /></Button>
+                    <Button variant="raised" onClick={this.deleteLog}><Delete /></Button>
                     <Button variant="raised" onClick={this.graph}>Back</Button>
                 </div>
             );

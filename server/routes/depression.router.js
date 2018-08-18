@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     if (req.isAuthenticated) {
         // const todayDate = moment().format('L');
         const todayDate = moment().format().split('T', 1);
-        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" = $1 AND "patient_id" = $2;`;
+        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" = $1 AND "patient_id" = $2;`;
         pool.query(queryText, [todayDate, req.user.id])
             .then((results) => {
                 res.send(results.rows)
@@ -27,7 +27,7 @@ router.put('/date/:date', (req, res) => {
         // const todayDate = moment().format('L');
         // const todayDate = moment().format().split('T', 1);
         console.log('req.body put', req.body)
-        const queryText = `SELECT "time", "depression_rating", "id" FROM daily_log WHERE "date" ILIKE $1 AND "patient_id" = $2;;`;
+        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" ILIKE $1 AND "patient_id" = $2;;`;
         pool.query(queryText, [req.body, req.user.id])
             .then((results) => {
                 res.send(results.rows)
@@ -161,10 +161,10 @@ router.put('/:id', (req, res) => {
 });
 
 router.put('/therapist/:id', (req, res) => {
-    console.log('got to put', req.body)
+    console.log('got to put', req.body[0].id)
     if (req.isAuthenticated) {
         const queryText = `Update "patient_info" SET "therapist_id" = $1 WHERE "person_id" = $2;`;
-        pool.query(queryText, [req.params.id, req.user.id])
+        pool.query(queryText, [req.body[0].id, req.user.id])
             .then(() => { res.sendStatus(200); })
             .catch((err) => {
                 console.log('Error updating', err);

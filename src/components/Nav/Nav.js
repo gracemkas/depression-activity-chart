@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {Home} from '@material-ui/icons';
+
 
 const Nav = () => (
   <div className="navbar">
@@ -7,7 +9,7 @@ const Nav = () => (
       <ul>
         <li>
           <Link to="/patientHome">
-            Patient Home
+            <Home />
           </Link>
         </li>
       </ul>

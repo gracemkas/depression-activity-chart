@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import {Search} from '@material-ui/icons';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -104,12 +105,12 @@ class TherapistUpdate extends Component {
                     <p>Look up your therapist by first and last name: </p>
                     <input placeholder="First Name" onChange={this.handleChangeFor("first_name")} />
                     <input placeholder="Last Name" onChange={this.handleChangeFor("last_name")} />
-                    <Button variant="raised" onClick={this.findTherapist}>Search</Button>
-                    <Button variant="raised" onClick={this.currentTherapist}>Back</Button>
+                    <Button variant="raised" onClick={this.findTherapist}><Search /></Button>
+                    
 
-                    <p>
+                    <h3>
                         Results:
-                    </p>
+                    </h3>
                     <Paper>
                         <Table>
                             <TableHead>
@@ -130,6 +131,7 @@ class TherapistUpdate extends Component {
                             </TableBody>
                         </Table>
                     </Paper>
+                    <Button variant="raised" onClick={this.currentTherapist}>Back</Button>
                 </div>
             );
         }
