@@ -37,6 +37,8 @@ class PatientGraph extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER })
         this.props.dispatch({ type: 'GET_DATA' })
+        console.log('user', this.props.user.id);
+        
     }
 
     componentDidUpdate() {

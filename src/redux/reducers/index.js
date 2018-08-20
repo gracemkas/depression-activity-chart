@@ -13,8 +13,6 @@ const dataList = (state = [], action) => {
   }
 };
 
-
-
 const updatedData = (state = {
   id: '',
   depression_rating: 0,

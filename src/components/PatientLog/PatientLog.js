@@ -4,7 +4,6 @@ import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
 import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
-import TherapistHome from '../TherapistHome/TherapistHome';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -29,7 +28,10 @@ class PatientLog extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' });
-
+        console.log('role', this.props.user.role)
+        if (this.props.user.role === 'therapist'){
+            this.props.history.push('therapistHome');
+        }
     }
 
     componentDidUpdate() {
@@ -90,15 +92,7 @@ class PatientLog extends Component {
                     {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
-        }} else {
-            content = (
-                <div>
-                    <Nav />
-                    <TherapistHome />
-                    <p>Role{this.props.user.userName}</p>
-                </div>
-            )
-        }
+        }} 
 
         return (
             <div>

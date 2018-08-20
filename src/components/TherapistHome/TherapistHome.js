@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from '../../components/Nav/Nav';
+import TherapistNav from '../../components/TherapistNav/TherapistNav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import Table from '@material-ui/core/Table';
@@ -10,7 +10,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import {Search} from '@material-ui/icons';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -34,8 +33,7 @@ class TherapistUpdate extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        console.log('therapist', this.props);
-
+        this.props.dispatch({ type: 'GET_PATIENT_LIST' });
     }
 
     componentDidUpdate() {
@@ -102,27 +100,18 @@ class TherapistUpdate extends Component {
             content = (
                 <div>
                     <h2>Patient List</h2>
-                    <p>Look up your therapist by first and last name: </p>
-                    <input placeholder="First Name" onChange={this.handleChangeFor("first_name")} />
-                    <input placeholder="Last Name" onChange={this.handleChangeFor("last_name")} />
-                    <Button variant="raised" onClick={this.findTherapist}><Search /></Button>
-                    
-
-                    <h3>
-                        Results:
-                    </h3>
                     <Paper>
                         <Table>
                             <TableHead>
                                 <TableRow>
                                     <TableCell>
-                                        First Name
+                                        Username
                             </TableCell>
                                     <TableCell>
-                                        Last Name
+                                        Graph
                                 </TableCell>
                                     <TableCell>
-                                        Add Therapist
+                                        Delete
                             </TableCell>
                                 </TableRow>
                             </TableHead>
@@ -131,14 +120,13 @@ class TherapistUpdate extends Component {
                             </TableBody>
                         </Table>
                     </Paper>
-                    <Button variant="raised" onClick={this.currentTherapist}>Back</Button>
                 </div>
             );
         }
 
         return (
             <div>
-                {/* <Nav /> */}
+                <TherapistNav />
                 {content}
             </div>
         );

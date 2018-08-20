@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from '../../components/Nav/Nav';
+import TherapistNav from '../../components/TherapistNav/TherapistNav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
 import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
@@ -93,7 +93,7 @@ class PatientLog extends Component {
 
         return (
             <div>
-                <Nav />
+                <TherapistNav />
                 {content}
             </div>
         );
