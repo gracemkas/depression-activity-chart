@@ -70,7 +70,7 @@ class CurrentTherapist extends Component {
                     <h2>Current Therapist</h2>
                     <p>Therapist Name: {firstName.first_name} {firstName.last_name}</p>
                     <Button variant="raised" onClick={this.changeTherapist}>Change Therapist</Button>
-                    <Button variant="raised" onClick={this.home}>Back</Button>
+                    {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
         }

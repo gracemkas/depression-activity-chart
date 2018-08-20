@@ -58,7 +58,7 @@ class PatientGraph extends Component {
     }
 
     home = () => {
-        this.props.history.push('patientHome');
+        this.props.history.push('patientGraph');
     }
 
     changeDate = () => {
@@ -137,7 +137,7 @@ class PatientGraph extends Component {
                     />
                     </form>
                     <Button variant="raised" onClick={this.changeDate}>Submit</Button>
-                    <Button variant="raised" onClick={this.home}>Back</Button>
+                    {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
         }

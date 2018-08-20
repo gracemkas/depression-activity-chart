@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
+import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
 
 const mapStateToProps = state => ({
     user: state.user,
+    therapistName: state.therapistName
 });
 
 class AddItemPage extends Component {
@@ -23,6 +25,7 @@ class AddItemPage extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
     }
 
     componentDidUpdate() {
@@ -57,12 +60,19 @@ class AddItemPage extends Component {
         //         activity: ''
         //     }
         // });
-        this.props.history.push('patientHome');
+        this.props.history.push('patientGraph');
     }
 
     render() {
         let content = null;
         if (this.props.user.userName) {
+            if (this.props.therapistName.first_name === undefined) {
+                content =
+                    <div>
+                        <PatientChooseTherapist />
+                    </div>
+            } else {
+                content =
             content = (
                 <div>
                     <h1>Record Your Mood</h1>
@@ -71,10 +81,10 @@ class AddItemPage extends Component {
                     <p>What are you doing right now?</p>
                     <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
                     <Button variant="raised" onClick={this.addLog}>Submit</Button>
-                    <Button variant="raised" onClick={this.home}>Back</Button>
+                    {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
-        }
+        }}
 
         return (
             <div>
