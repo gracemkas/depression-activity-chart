@@ -4,13 +4,14 @@ import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
 import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
+import TherapistHome from '../TherapistHome/TherapistHome';
 
 const mapStateToProps = state => ({
     user: state.user,
     therapistName: state.therapistName
 });
 
-class AddItemPage extends Component {
+class PatientLog extends Component {
 
     constructor(props) {
         super(props)
@@ -23,14 +24,18 @@ class AddItemPage extends Component {
         }
     }
 
+    
+
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
+        this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' });
+
     }
 
     componentDidUpdate() {
         if (!this.props.user.isLoading && this.props.user.userName === null) {
             this.props.history.push('home');
+
         }
     }
 
@@ -64,17 +69,18 @@ class AddItemPage extends Component {
     }
 
     render() {
+        
         let content = null;
-        if (this.props.user.userName) {
+        if (this.props.user.userName && this.props.user.role === 'patient') {
             if (this.props.therapistName.first_name === undefined) {
                 content =
                     <div>
                         <PatientChooseTherapist />
                     </div>
             } else {
-                content =
             content = (
                 <div>
+                    <Nav />
                     <h1>Record Your Mood</h1>
                     <p>Rate the severity of your depressed mood from 0 (none) to 10 (severe) </p>
                     <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
@@ -84,15 +90,22 @@ class AddItemPage extends Component {
                     {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
-        }}
+        }} else {
+            content = (
+                <div>
+                    <Nav />
+                    <TherapistHome />
+                    <p>Role{this.props.user.userName}</p>
+                </div>
+            )
+        }
 
         return (
             <div>
-                <Nav />
                 {content}
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps)(AddItemPage);
+export default connect(mapStateToProps)(PatientLog);

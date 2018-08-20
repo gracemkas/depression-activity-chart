@@ -54,6 +54,7 @@ class PatientGraph extends Component {
                     [propertyName]: event.target.value
                 }
             })
+            // this.changeDate();
         }
     }
 
@@ -136,7 +137,7 @@ class PatientGraph extends Component {
                         onChange={this.handleChangeFor("choosenDate")}
                     />
                     </form>
-                    <Button variant="raised" onClick={this.changeDate}>Submit</Button>
+                    <Button variant="raised" onClick={this.changeDate}>Set New Date</Button>
                     {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
