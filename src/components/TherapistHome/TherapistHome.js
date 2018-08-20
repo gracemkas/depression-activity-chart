@@ -13,23 +13,23 @@ import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
     user: state.user,
-    foundTherapist: state.findTherapist
+    showpatientList: state.showpatientList
 });
 
 // let therapistListArray: [];
 
 class TherapistUpdate extends Component {
 
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-        this.state = {
-            therapistSearch: {
-                first_name: '',
-                last_name: ''
-            }
-        }
-    }
+        // this.state = {
+        //     therapistSearch: {
+        //         first_name: '',
+        //         last_name: ''
+        //     }
+        // }
+    // }
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -42,11 +42,11 @@ class TherapistUpdate extends Component {
         }
     }
 
-    currentTherapist = () => {
-        this.props.foundTherapist.first_name = '';
-        this.props.foundTherapist.last_name = '';
-        this.props.history.push('patientCurrentTherapist');
-    }
+    // currentTherapist = () => {
+    //     this.props.foundTherapist.first_name = '';
+    //     this.props.foundTherapist.last_name = '';
+    //     this.props.history.push('patientCurrentTherapist');
+    // }
 
     handleChangeFor = (propertyName) => {
         return (event) => {
@@ -60,34 +60,34 @@ class TherapistUpdate extends Component {
     }
 
 
-    findTherapist = () => {
-        console.log('find', this.state.therapistSearch)
-        this.props.dispatch({
-            type: 'FIND_THERAPIST',
-            payload: this.state.therapistSearch
-        })
-    }
+    // findTherapist = () => {
+    //     console.log('find', this.state.therapistSearch)
+    //     this.props.dispatch({
+    //         type: 'FIND_THERAPIST',
+    //         payload: this.state.therapistSearch
+    //     })
+    // }
 
-    updateTherapist = () => {
-        console.log('edit', this.props.foundTherapist)
-        this.props.dispatch({
-            type: 'UPDATE_THERAPIST',
-            payload: this.props.foundTherapist
-        })
-        // therapistListArray = [];
-        this.props.history.push('patientCurrentTherapist');
-    }
+    // updateTherapist = () => {
+    //     console.log('edit', this.props.foundTherapist)
+    //     this.props.dispatch({
+    //         type: 'UPDATE_THERAPIST',
+    //         payload: this.props.foundTherapist
+    //     })
+    //     // therapistListArray = [];
+    //     this.props.history.push('patientCurrentTherapist');
+    // }
 
     render() {
         let content = null;
         
-        let therapistListArray = this.props.foundTherapist.map((item, index) => {
+        let therapistListArray = this.props.showpatientList.map((item, index) => {
             return <TableRow key={index}>
                 <TableCell>
-                    {item.first_name}
+                    {item.username}
                 </TableCell>
                 <TableCell>
-                    {item.last_name}
+                <Button variant="raised" onClick={() => this.updateTherapist(this.props.item)}>Add</Button>
                 </TableCell>
                 <TableCell>
                     <Button variant="raised" onClick={() => this.updateTherapist(this.props.item)}>Add</Button>

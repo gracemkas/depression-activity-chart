@@ -114,7 +114,7 @@ router.get('/patientlist', (req, res) => {
         WHERE "patient_info"."therapist_id" = $1;`;
         pool.query(queryText, [req.user.id])
             .then((results) => {
-                res.send(results.rows[0])
+                res.send(results.rows)
                 console.log(results.rows);
 
             }).catch((err) => {

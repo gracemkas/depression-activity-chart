@@ -81,6 +81,7 @@ function* getPatientList() {
     console.log('getPatientList saga');
 
     const patientList = yield call(axios.get, '/api/depression/patientlist')
+    console.log('patientList', patientList)
     yield dispatch({
       type: 'SHOW_PATIENT_LIST',
       payload: patientList.data

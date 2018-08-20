@@ -13,6 +13,15 @@ const dataList = (state = [], action) => {
   }
 };
 
+const showpatientList = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_PATIENT_LIST':
+      return action.payload
+    default:
+      return state;
+  }
+};
+
 const updatedData = (state = {
   id: '',
   depression_rating: 0,
@@ -60,7 +69,8 @@ const store = combineReducers({
   dataList,
   updatedData,
   therapistName,
-  findTherapist
+  findTherapist,
+  showpatientList
 });
 
 export default store;
