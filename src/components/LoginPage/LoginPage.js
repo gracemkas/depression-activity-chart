@@ -30,7 +30,7 @@ class LoginPage extends Component {
         this.props.user.userName !== null 
         // && this.props.user.role === 'patient'
       ) {
-      this.props.history.push('patientHome');
+      this.props.history.push('logMood');
     }
   }
 

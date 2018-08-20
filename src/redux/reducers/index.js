@@ -49,6 +49,8 @@ const findTherapist = (state = [], action) => {
   switch (action.type) {
     case 'THERAPIST_FOUND':
       return action.payload
+    case 'REMOVE_UPDATE_THERAPIST':
+      return []
     default:
       return state;
   }

@@ -81,7 +81,8 @@ class PatientGraph extends Component {
             const data = this.props.dataList;
             content = (
                 <div>
-                    <h2>Graph of Daily Mood</h2>
+                    <h3>Graph of Daily Mood</h3>
+                    <h3>Activity</h3>
                     <VictoryChart
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
@@ -94,7 +95,7 @@ class PatientGraph extends Component {
                             tickFormat={(x) => new Date(x).getHours ()}
                         /> */}
                         <VictoryBar data={data}
-                            style={{ data: { fill: "#DF744A" } }}
+                            style={{ data: { fill: "#392F5A" } }}
                             events={[{
                                 target: "data",
                                 eventHandlers: {

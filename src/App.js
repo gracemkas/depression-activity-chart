@@ -11,6 +11,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 // import UserPage from './components/UserPage/UserPage';
 // import InfoPage from './components/InfoPage/InfoPage';
+// import Nav from './components/Nav/Nav';
 import PatientHome from './components/PatientHome/PatientHome';
 import ChooseTherapist from './components/PatientChooseTherapist/PatientChooseTherapist';
 import LogMood from './components/PatientLog/PatientLog';
@@ -63,6 +64,10 @@ const App = () => (
           path="/therapistUpdate"
           component={TherapistUpdate}
         />
+        {/* <Route
+          path="/nav"
+          component={Nav}
+        /> */}
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
 

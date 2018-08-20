@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import Button from '@material-ui/core/Button';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { triggerLogout } from '../../redux/actions/loginActions';
+// import { triggerLogout } from '../../redux/actions/loginActions';
 import Grid from '@material-ui/core/Grid';
 import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
 
@@ -25,10 +25,10 @@ class PatientHome extends Component {
         }
     }
 
-    logout = () => {
-        this.props.dispatch(triggerLogout());
-        // this.props.history.push('home');
-    }
+    // logout = () => {
+    //     this.props.dispatch(triggerLogout());
+    //     // this.props.history.push('home');
+    // }
 
     logMood = () => {
         this.props.history.push('logMood');
@@ -47,53 +47,55 @@ class PatientHome extends Component {
         console.log('therapist', this.props.therapistName.first_name)
 
         if (this.props.user.userName) {
-            if (this.props.therapistName.first_name === undefined){
-            content = 
-                <div>
-                    <PatientChooseTherapist />
-                </div>
+            if (this.props.therapistName.first_name === undefined) {
+                content =
+                    <div>
+                        <PatientChooseTherapist />
+                    </div>
             } else {
-                content = 
-                <div>
-                    <Nav />
-                    <Grid container justify="center" id="welcome">
-                        <Grid item xs={8}>
-                            Welcome, {this.props.user.userName}!
-                    </Grid>
-                        <Grid item xs={4}>
-                            <Button variant="raised" onClick={this.logout}>
+                content =
+                    <div>
+                        <Grid container justify="center" id="welcome">
+                            <Grid item xs={6}>
+                                <Nav />
+                            </Grid>
+                            <Grid item xs={6}>
+                                Welcome, {this.props.user.userName}!
+                            </Grid>
+                            {/* <Grid item xs={4}>
+                            <Button variant="extendedFab" onClick={this.logout}>
                                 Log Out
                             </Button>
-                        </Grid>
-                        <Grid item xs={4}></Grid>
-                        <Grid item xs={8}>
-                            <Button variant="raised" onClick={this.logMood}>
-                                Log Mood
+                        </Grid> */}
+                            <Grid item xs={4}></Grid>
+                            <Grid item xs={8}>
+                                <Button variant="extendedFab" size="large" onClick={this.logMood}>
+                                    Log Mood
                             </Button>
-                        </Grid>
-                        <Grid item xs={3}></Grid>
-                        <Grid item xs={9}>
-                            <Button variant="raised" onClick={this.patientGraph}>
-                                Daily Mood Graph
+                            </Grid>
+                            <Grid item xs={3}></Grid>
+                            <Grid item xs={9}>
+                                <Button variant="extendedFab" size="large" onClick={this.patientGraph}>
+                                    Daily Mood Graph
                         </Button>
-                        </Grid>
-                        <Grid item xs={4}></Grid>
-                        <Grid item xs={8}>
-                            <Button variant="raised" onClick={this.currentTherapist}>
-                                Therapist
+                            </Grid>
+                            <Grid item xs={4}></Grid>
+                            <Grid item xs={8}>
+                                <Button variant="extendedFab" size="large" onClick={this.currentTherapist}>
+                                    Therapist
                         </Button>
-                        </Grid>
-                        
+                            </Grid>
 
-                    </Grid>
-                </div>
+
+                        </Grid>
+                    </div>
             }
             // );
         }
 
         return (
             <div>
-                
+
                 {content}
             </div>
         );

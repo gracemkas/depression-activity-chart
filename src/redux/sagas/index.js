@@ -131,6 +131,9 @@ function* updateTherapist(action) {
     yield dispatch({
       type: 'GET_CURRENT_THERAPIST'
     })
+    yield dispatch({
+      type: 'REMOVE_UPDATE_THERAPIST'
+    })
   } catch (err) {
     yield console.log(err);
   }
