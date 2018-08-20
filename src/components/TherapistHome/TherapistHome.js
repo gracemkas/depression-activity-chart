@@ -9,7 +9,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+import {Delete, InsertChartOutlined} from '@material-ui/icons';
+
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -87,10 +89,10 @@ class TherapistUpdate extends Component {
                     {item.username}
                 </TableCell>
                 <TableCell>
-                <Button variant="raised" onClick={() => this.updateTherapist(this.props.item)}>Add</Button>
+                    <InsertChartOutlined variant="raised" onClick={() => this.updateTherapist(this.props.item)}/>
                 </TableCell>
                 <TableCell>
-                    <Button variant="raised" onClick={() => this.updateTherapist(this.props.item)}>Add</Button>
+                    <Delete variant="raised" onClick={() => this.updateTherapist(this.props.item)}/>
                 </TableCell>
             </TableRow>
 
