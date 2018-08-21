@@ -108,6 +108,10 @@ function* findTherapist(action) {
 function* therapistPatientGraph(action) {
   try {
     console.log('therapistPatientGraph saga');
+    yield dispatch({
+      type: 'THERAPIST_PATIENT_DATA_ID',
+      payload: action.payload
+    })
     const therapistPatientGraph = yield call(axios.put, `/api/depression/therapistpatientgraph/${action.payload}`, action.payload)  
     yield dispatch({
       type: 'THERAPIST_PATIENT_DATA',

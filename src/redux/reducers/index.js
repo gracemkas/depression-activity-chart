@@ -63,6 +63,17 @@ const therapistName = (state = '', action) => {
   }
 };
 
+
+
+const therapistPatientId = (state = '', action) => {
+  switch (action.type) {
+    case 'THERAPIST_PATIENT_DATA_ID':
+      return action.payload
+    default:
+      return state;
+  }
+};
+
 const findTherapist = (state = [], action) => {
   switch (action.type) {
     case 'THERAPIST_FOUND':
@@ -82,7 +93,8 @@ const store = combineReducers({
   therapistName,
   findTherapist,
   showpatientList,
-  therapistPatientGraph
+  therapistPatientGraph,
+  therapistPatientId
 });
 
 export default store;
