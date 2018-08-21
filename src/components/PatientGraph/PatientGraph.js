@@ -10,7 +10,8 @@ const moment = require('moment');
 
 const mapStateToProps = state => ({
     user: state.user,
-    dataList: state.dataList
+    dataList: state.dataList,
+    // updatedData: state.updatedData
 });
 const styles = theme => ({
     container: {
@@ -30,6 +31,9 @@ class PatientGraph extends Component {
         this.state = {
             newChoosenDate: {
                 choosenDate: ''
+            },
+            currentActivity: {
+                activity: ''
             }
         }
     }
@@ -60,6 +64,14 @@ class PatientGraph extends Component {
         }
     }
 
+    changeActivity = (activity) => {
+        return this.setState({
+            currentActivity: {
+                activity: activity
+            }
+        })
+    }
+
     home = () => {
         this.props.history.push('patientGraph');
     }
@@ -85,7 +97,7 @@ class PatientGraph extends Component {
             content = (
                 <div>
                     <h3>Graph of Daily Mood</h3>
-                    <h3>Activity</h3>
+                    <h3>Activity: {this.state.currentActivity.activity}</h3>
                     <VictoryChart
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
@@ -98,29 +110,33 @@ class PatientGraph extends Component {
                             tickFormat={(x) => new Date(x).getHours ()}
                         /> */}
                         <VictoryBar data={data}
-                            style={{ data: { fill: "#392F5A" } }}
+                            style={{ data: { fill: "#392F5A"} }}
                             events={[{
                                 target: "data",
                                 eventHandlers: {
                                     onClick: (evt, clickedProps) => {
                                         console.log('clicked', clickedProps.datum.id)
+                                        this.changeActivity(clickedProps.datum.activity);
+                                        this.props.dispatch({
+                                            type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
+                                        })
+                                        
                                         // return [
                                         //   {
                                         //     target: "data",
-                                        //     // mutation: (props) => {
-                                        //     //   const fill = props.style && props.style.fill;
-                                        //     //   return fill === "black" ? null : { style: { fill: "black" } };
-                                        //     // }
+                                        //     mutation: (props) => {
+                                        //       const fill = props.style && props.style.fill;
+                                        //       return fill === "black" ? null : { style: { fill: "black" } };
+                                        //     }
                                         //     patientGraph: () => {
-                                        this.props.history.push('patientGraphUpdate');
+                                        // this.props.history.push('patientGraphUpdate');
                                         // }
+
                                         //   }
                                         // ];
 
 
-                                        this.props.dispatch({
-                                            type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
-                                        })
+
                                     }
                                 }
                             }]}
