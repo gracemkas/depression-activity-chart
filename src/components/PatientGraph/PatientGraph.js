@@ -15,15 +15,15 @@ const mapStateToProps = state => ({
 });
 const styles = theme => ({
     container: {
-      display: 'flex',
-      flexWrap: 'wrap',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 200,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
     },
-  });
+});
 
 class PatientGraph extends Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class PatientGraph extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER })
         this.props.dispatch({ type: 'GET_DATA' })
         console.log('user', this.props.user.id);
-        
+
     }
 
     componentDidUpdate() {
@@ -72,8 +72,8 @@ class PatientGraph extends Component {
         })
     }
 
-    home = () => {
-        this.props.history.push('patientGraph');
+    update = () => {
+        this.props.history.push('patientGraphUpdate');
     }
 
     changeDate = () => {
@@ -90,7 +90,7 @@ class PatientGraph extends Component {
         if (this.props.user.userName) {
             console.log('state', this.state);
             console.log('date', moment().format());
-            
+
             const date = moment().format().split('T', 1);
             console.log('new date', date);
             const data = this.props.dataList;
@@ -110,7 +110,7 @@ class PatientGraph extends Component {
                             tickFormat={(x) => new Date(x).getHours ()}
                         /> */}
                         <VictoryBar data={data}
-                            style={{ data: { fill: "#392F5A"} }}
+                            style={{ data: { fill: "#392F5A" } }}
                             events={[{
                                 target: "data",
                                 eventHandlers: {
@@ -120,20 +120,22 @@ class PatientGraph extends Component {
                                         this.props.dispatch({
                                             type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
                                         })
-                                        
-                                        // return [
-                                        //   {
-                                        //     target: "data",
-                                        //     mutation: (props) => {
-                                        //       const fill = props.style && props.style.fill;
-                                        //       return fill === "black" ? null : { style: { fill: "black" } };
-                                        //     }
-                                        //     patientGraph: () => {
-                                        // this.props.history.push('patientGraphUpdate');
-                                        // }
 
-                                        //   }
-                                        // ];
+
+                                        return [
+
+                                            {
+                                                target: "data",
+                                                mutation: (props) => {
+                                                    const fill = props.style && props.style.fill;
+                                                    return fill === "black" ? null : { style: { fill: "black" } };
+                                                }
+                                                //     patientGraph: () => {
+                                                // this.props.history.push('patientGraphUpdate');
+                                                // }
+
+                                            }
+                                        ];
 
 
 
@@ -145,18 +147,18 @@ class PatientGraph extends Component {
                         />
                     </VictoryChart>
                     {/* className={this.props.classes.} */}
-                    <p>Click on a bar to edit or delete it</p>
+                    <p>Click on a bar and then click the update button to edit or delete it</p>
+                    <Button variant="raised" onClick={this.update}>Update</Button>
                     <form className={this.props.classes.container} noValidate>
-                    <TextField 
-                        id="date"
-                        label="Choose a Date"
-                        type="date"
-                        defaultValue={date}
-                        onChange={this.handleChangeFor("choosenDate")}
-                    />
+                        <TextField
+                            id="date"
+                            label="Choose a Date"
+                            type="date"
+                            defaultValue={date}
+                            onChange={this.handleChangeFor("choosenDate")}
+                        />
                     </form>
                     <Button variant="raised" onClick={this.changeDate}>Set New Date</Button>
-                    {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
         }
@@ -172,4 +174,4 @@ class PatientGraph extends Component {
 }
 const styleGraph = withStyles(styles)(PatientGraph)
 
-export default  connect(mapStateToProps)(styleGraph);
+export default connect(mapStateToProps)(styleGraph);
