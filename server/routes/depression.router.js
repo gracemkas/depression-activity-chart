@@ -109,7 +109,7 @@ router.get('/patientlist', (req, res) => {
     if (req.isAuthenticated) {
         console.log('userid', req.user.id);
         
-        const queryText = `SELECT "person"."username" FROM "patient_info"
+        const queryText = `SELECT "person"."username", "patient_info"."id" FROM "patient_info"
         JOIN "person" ON "patient_info"."person_id" = "person"."id"
         WHERE "patient_info"."therapist_id" = $1;`;
         pool.query(queryText, [req.user.id])
@@ -200,6 +200,22 @@ router.put('/therapist/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     if (req.isAuthenticated) {
         const queryText = 'DELETE FROM "daily_log" WHERE id=$1';
+        pool.query(queryText, [req.params.id])
+            .then(() => { res.sendStatus(200); })
+            .catch((err) => {
+                console.log('Error deleting', err);
+                res.sendStatus(500);
+            });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+
+
+router.delete('/patientdelete/:id', (req, res) => {
+    if (req.isAuthenticated) {
+        const queryText = 'DELETE FROM "patient_info" WHERE id=$1';
         pool.query(queryText, [req.params.id])
             .then(() => { res.sendStatus(200); })
             .catch((err) => {

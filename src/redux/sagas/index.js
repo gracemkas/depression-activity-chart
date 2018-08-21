@@ -15,7 +15,7 @@ export default function* rootSaga() {
   yield takeEvery('CHANGE_DATE', changeDate)
   yield takeEvery('ADD_THERAPIST', addTherapist)
   yield takeEvery('GET_PATIENT_LIST', getPatientList)
-  
+  yield takeEvery('DELETE_PATIENT', deletePatient)
   
   yield all([
     userSaga(),
@@ -164,6 +164,19 @@ function* deleteLog(action) {
     yield call(axios.delete, `/api/depression/${action.payload}`);
     yield dispatch({
       type: 'GET_DATA'
+    })
+  } catch (err) {
+    yield console.log(err);
+
+  }
+}
+
+function* deletePatient(action) {
+  console.log('deletePatient', action.payload);
+  try {
+    yield call(axios.delete, `/api/depression/patientdelete/${action.payload}`);
+    yield dispatch({
+      type: 'GET_PATIENT_LIST'
     })
   } catch (err) {
     yield console.log(err);

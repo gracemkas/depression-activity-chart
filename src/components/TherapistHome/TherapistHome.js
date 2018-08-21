@@ -80,6 +80,15 @@ class TherapistUpdate extends Component {
     //     this.props.history.push('patientCurrentTherapist');
     // }
 
+    handleDelete = (item) => {
+        console.log('delete', item.id)
+          this.props.dispatch({
+            type: 'DELETE_PATIENT', payload: item.id
+          })
+        }
+
+
+
     render() {
         let content = null;
         
@@ -92,7 +101,7 @@ class TherapistUpdate extends Component {
                     <InsertChartOutlined variant="raised" onClick={() => this.updateTherapist(this.props.item)}/>
                 </TableCell>
                 <TableCell>
-                    <Delete variant="raised" onClick={() => this.updateTherapist(this.props.item)}/>
+                    <Delete variant="raised" onClick={() => this.handleDelete(item)}/>
                 </TableCell>
             </TableRow>
 
