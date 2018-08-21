@@ -11,6 +11,7 @@ const moment = require('moment');
 const mapStateToProps = state => ({
     user: state.user,
     dataList: state.dataList,
+    therapistPatientGraph: state.therapistPatientGraph
     // updatedData: state.updatedData
 });
 const styles = theme => ({
@@ -93,7 +94,8 @@ class PatientGraph extends Component {
 
             const date = moment().format().split('T', 1);
             console.log('new date', date);
-            const data = this.props.dataList;
+            // const data = this.props.dataList;
+            const data = this.props.therapistPatientGraph;
             content = (
                 <div>
                     <h3>Graph of Daily Mood</h3>

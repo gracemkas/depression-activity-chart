@@ -87,6 +87,14 @@ class TherapistUpdate extends Component {
           })
         }
 
+    patientGraph = (item) => {
+        console.log('graph', item.person_id)
+        this.props.dispatch({
+            type: 'THERAPIST_PATIENT_GRAPH', payload: item.person_id
+          })
+        this.props.history.push('patientGraph');
+    }
+
 
 
     render() {
@@ -98,7 +106,7 @@ class TherapistUpdate extends Component {
                     {item.username}
                 </TableCell>
                 <TableCell>
-                    <InsertChartOutlined variant="raised" onClick={() => this.updateTherapist(this.props.item)}/>
+                    <InsertChartOutlined variant="raised" onClick={() => this.patientGraph(item)}/>
                 </TableCell>
                 <TableCell>
                     <Delete variant="raised" onClick={() => this.handleDelete(item)}/>

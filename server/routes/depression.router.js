@@ -64,6 +64,26 @@ router.put('/find/:name', (req, res) => {
     }
 });
 
+
+router.put('/therapistpatientgraph/:id', (req, res) => {
+    if (req.isAuthenticated) {
+        // const todayDate = moment().format('L');
+        const todayDate = moment().format().split('T', 1);
+        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" = $1 AND "patient_id" = $2;`;
+        pool.query(queryText, [todayDate, req.params.id])
+            .then((results) => {
+                res.send(results.rows)
+                console.log(results.rows);
+
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 router.put('/date/:date', (req, res) => {
     if (req.isAuthenticated) {
         console.log('req.body', req.body);
@@ -109,7 +129,7 @@ router.get('/patientlist', (req, res) => {
     if (req.isAuthenticated) {
         console.log('userid', req.user.id);
         
-        const queryText = `SELECT "person"."username", "patient_info"."id" FROM "patient_info"
+        const queryText = `SELECT "person"."username", "patient_info"."id", "patient_info"."person_id" FROM "patient_info"
         JOIN "person" ON "patient_info"."person_id" = "person"."id"
         WHERE "patient_info"."therapist_id" = $1;`;
         pool.query(queryText, [req.user.id])
