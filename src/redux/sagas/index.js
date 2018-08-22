@@ -18,6 +18,7 @@ export default function* rootSaga() {
   yield takeEvery('DELETE_PATIENT', deletePatient)
   yield takeEvery('THERAPIST_PATIENT_GRAPH', therapistPatientGraph)
   yield takeEvery('CHANGE_THERAPIST_DATE', changeTherapistDate)
+  yield takeEvery('GET_THERAPIST_NAME', getTherapistRegister)
   
   yield all([
     userSaga(),
@@ -81,12 +82,24 @@ function* getCurrentTherapist() {
 function* getPatientList() {
   try {
     console.log('getPatientList saga');
-
     const patientList = yield call(axios.get, '/api/depression/patientlist')
     console.log('patientList', patientList)
     yield dispatch({
       type: 'SHOW_PATIENT_LIST',
       payload: patientList.data
+    })
+  } catch (err) {
+    yield console.log(err);
+  }
+}
+
+function* getTherapistRegister() {
+  try {
+    console.log('getTherapistRegister saga');
+    const therapistRegister = yield call(axios.get, '/api/depression/therapistregister')
+    yield dispatch({
+      type: 'THERAPIST_NAME_REGISTER',
+      payload: therapistRegister.data
     })
   } catch (err) {
     yield console.log(err);

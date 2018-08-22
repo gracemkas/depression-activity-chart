@@ -11,11 +11,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 // import Button from '@material-ui/core/Button';
 import {Delete, InsertChartOutlined} from '@material-ui/icons';
+import TherapistRegister from '../../components/TherapistRegister/TherapistRegister';
 
 
 const mapStateToProps = state => ({
     user: state.user,
-    showpatientList: state.showpatientList
+    showpatientList: state.showpatientList,
+    therapistNameRegister: state.therapistNameRegister
 });
 
 // let therapistListArray: [];
@@ -36,6 +38,7 @@ class TherapistUpdate extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({ type: 'GET_PATIENT_LIST' });
+        this.props.dispatch({ type: 'GET_THERAPIST_NAME' });
     }
 
     componentDidUpdate() {
@@ -116,6 +119,14 @@ class TherapistUpdate extends Component {
         })
 
         if (this.props.user.userName) {
+            console.log('$$$$$$$$', this.props.therapistNameRegister)
+            if (this.props.therapistNameRegister.first_name === undefined) {
+                content = (
+                    <div>
+                        <TherapistRegister />
+                    </div>
+                )
+            } else {
             content = (
                 <div>
                     <h2>Patient List</h2>
@@ -142,6 +153,7 @@ class TherapistUpdate extends Component {
                 </div>
             );
         }
+    }
 
         return (
             <div>

@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
     therapistName: state.therapistName
 });
 
-class PatientLog extends Component {
+class TherapistRegister extends Component {
 
     constructor(props) {
         super(props)
@@ -100,4 +100,4 @@ class PatientLog extends Component {
     }
 }
 
-export default connect(mapStateToProps)(PatientLog);
+export default connect(mapStateToProps)(TherapistRegister);

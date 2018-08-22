@@ -22,6 +22,24 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/therapistregister', (req, res) => {
+    if (req.isAuthenticated) {
+        const queryText = `SELECT "first_name" FROM "therapist_info" WHERE "person_id" = $1;`;
+        pool.query(queryText, [req.user.id])
+            .then((results) => {
+                res.send(results.rows[0])
+                console.log(results.rows);
+
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+
 router.put('/date/:date', (req, res) => {
     if (req.isAuthenticated) {
         // const todayDate = moment().format('L');
