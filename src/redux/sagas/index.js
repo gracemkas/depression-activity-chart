@@ -17,6 +17,7 @@ export default function* rootSaga() {
   yield takeEvery('GET_PATIENT_LIST', getPatientList)
   yield takeEvery('DELETE_PATIENT', deletePatient)
   yield takeEvery('THERAPIST_PATIENT_GRAPH', therapistPatientGraph)
+  yield takeEvery('CHANGE_THERAPIST_DATE', changeTherapistDate)
   
   yield all([
     userSaga(),
@@ -154,6 +155,20 @@ function* changeDate(action) {
     yield dispatch({
       type: 'STORE_NEW_DATE',
       payload: newDate.data
+    })
+  } catch (err) {
+    yield console.log(err);
+  }
+}
+
+
+function* changeTherapistDate(action) {
+  try {
+    console.log('changeDate saga');
+    const newTherapistDate = yield call(axios.put, `/api/depression/therapistdate`, action.payload);
+    yield dispatch({
+      type: 'STORE_NEW_THERAPIST_DATE',
+      payload: newTherapistDate.data
     })
   } catch (err) {
     yield console.log(err);

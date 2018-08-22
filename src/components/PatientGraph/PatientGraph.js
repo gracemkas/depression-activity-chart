@@ -95,11 +95,23 @@ class PatientGraph extends Component {
         this.props.history.push('patientGraphUpdate');
     }
 
+    // backToList = () => {
+    //     this.props.history.push('therapistHome');
+    // }
+
     changeDate = () => {
         console.log('date change', this.state.newChoosenDate.choosenDate)
         this.props.dispatch({
             type: 'CHANGE_DATE',
             payload: this.state.newChoosenDate.choosenDate.split(':', 1)
+        })
+    }
+
+    therapistChangeDate = () => {
+        console.log('+++++++++++', this.state.therapistDate.patientId)
+        this.props.dispatch({
+            type: 'CHANGE_THERAPIST_DATE',
+            payload: this.state.therapistDate
         })
     }
     
@@ -223,7 +235,7 @@ class PatientGraph extends Component {
                             onChange={this.handleChangeForTherapist("choosenTherapistDate")}
                         />
                     </form>
-                    <Button variant="raised" onClick={this.changeDate}>Set New Date</Button>
+                    <Button variant="raised" onClick={this.therapistChangeDate}>Set New Date</Button>
                 </div>
             );
 

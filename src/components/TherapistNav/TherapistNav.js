@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
@@ -43,8 +43,8 @@ class TherapistNav extends Component {
     this.props.dispatch(triggerLogout());
   }
 
-//   logMood = () => {
-//     this.props.history.push('logMood');
+//   home = () => {
+//     this.props.history.push('therapistHome');
 // }
 
 // patientGraph = () => {
@@ -64,10 +64,14 @@ class TherapistNav extends Component {
               onClick={this.handleClick} />
             <Menu
               id="simple-menu"
+              className="menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
             >
+            <Link to="/therapistHome" style={{ outline: 'none' }}><MenuItem>
+              Patient List
+              </MenuItem></Link>
               <MenuItem onClick={this.logout}>Logout</MenuItem>
             </Menu>
       </div>

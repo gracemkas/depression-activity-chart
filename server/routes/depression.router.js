@@ -27,11 +27,32 @@ router.put('/date/:date', (req, res) => {
         // const todayDate = moment().format('L');
         // const todayDate = moment().format().split('T', 1);
         console.log('req.body put', req.body)
-        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" ILIKE $1 AND "patient_id" = $2;;`;
+        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" ILIKE $1 AND "patient_id" = $2;`;
         pool.query(queryText, [req.body, req.user.id])
             .then((results) => {
                 res.send(results.rows)
                 console.log(results.rows);
+
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+
+router.put('/therapistdate', (req, res) => {
+    if (req.isAuthenticated) {
+        // const todayDate = moment().format('L'); 
+        const todayNewDate = req.body.choosenTherapistDate.split(':', 1)
+        console.log('req.body put', req.body.choosenTherapistDate)
+        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" ILIKE $1 AND "patient_id" = $2;`;
+        pool.query(queryText, [todayNewDate, req.body.patientId])
+            .then((results) => {
+                res.send(results.rows)
+                console.log('results', results.rows);
 
             }).catch((err) => {
                 console.log(err);

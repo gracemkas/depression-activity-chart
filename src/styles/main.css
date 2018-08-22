@@ -3,7 +3,7 @@ body {
     background-color: rgb(241, 248, 248);
 }
 
-#simple-menu{
+.menu{
     float: left;
     width: 190px;
 }

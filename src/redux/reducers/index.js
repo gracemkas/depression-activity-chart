@@ -17,8 +17,8 @@ const therapistPatientGraph = (state = [], action) => {
   switch (action.type) {
     case 'THERAPIST_PATIENT_DATA':
       return action.payload
-    // case 'STORE_NEW_DATE':
-    //   return action.payload
+    case 'STORE_NEW_THERAPIST_DATE':
+      return action.payload
     default:
       return state;
   }

@@ -73,6 +73,7 @@ class Nav extends Component {
               onClick={this.handleClick} />
             <Menu
               id="simple-menu"
+              className="menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
