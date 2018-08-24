@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TherapistNav from '../../components/TherapistNav/TherapistNav';
+// import TherapistNav from '../../components/TherapistNav/TherapistNav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
-import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -16,16 +16,16 @@ class TherapistRegister extends Component {
         super(props)
 
         this.state = {
-            newLog: {
-                depression_rating: '',
-                activity: ''
+            newName: {
+                first_name: '',
+                last_name: ''
             }
         }
     }
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
+        // this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
     }
 
     componentDidUpdate() {
@@ -34,25 +34,25 @@ class TherapistRegister extends Component {
         }
     }
 
-    home = () => {
-        this.props.history.push('patientHome');
-    }
+    // home = () => {
+    //     this.props.history.push('patientHome');
+    // }
 
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
-                newLog: {
-                    ...this.state.newLog,
+                newName: {
+                    ...this.state.newName,
                     [propertyName]: event.target.value
                 }
             })
         }
     }
 
-    addLog = () => {
+    addName = () => {
         this.props.dispatch({
-            type: 'POST_LOG',
-            payload: this.state.newLog
+            type: 'POST_THERAPIST_NAME',
+            payload: this.state.newName
         })
         // this.setState({
         //     newLog: {
@@ -60,44 +60,40 @@ class TherapistRegister extends Component {
         //         activity: ''
         //     }
         // });
-        this.props.history.push('patientGraph');
+        console.log('PROPS:', this.props.history)
+        // this.props.dispatch({ type: 'GET_THERAPIST_NAME' });
     }
 
     render() {
         let content = null;
-        if (this.props.user.userName && this.props.user.role === 'patient') {
-            if (this.props.therapistName.first_name === undefined) {
-                content =
-                    <div>
-                        <PatientChooseTherapist />
-                    </div>
-            } else {
+        console.log('PROPS:', this.props.history)
+        if (this.props.user.userName) {
             content = (
                 <div>
-                    <h1>Record Your Mood</h1>
-                    <p>Rate the severity of your depressed mood from 0 (none) to 10 (severe) </p>
-                    <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
-                    <p>What are you doing right now?</p>
-                    <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
-                    <Button variant="raised" onClick={this.addLog}>Submit</Button>
+                    {console.log('PROPS:', this.props.history)}
+                    <h1>Enter your first and last name:</h1>
+                    <p>First Name</p>
+                    <input placeholder="First Name" onChange={this.handleChangeFor("first_name")} />
+                    <p>Last Name</p>
+                    <input placeholder="Last Name" onChange={this.handleChangeFor("last_name")} />
+                    <Button variant="raised" onClick={this.addName}>Submit</Button>
                     {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
                 </div>
             );
-        }} else {
-            content = (
-                <div>
-                <p>Therapist</p>
-                </div>
-            )
         }
 
         return (
             <div>
-                <TherapistNav />
+                {/* <TherapistNav /> */}
                 {content}
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps)(TherapistRegister);
+export default withRouter(
+    connect(mapStateToProps)(TherapistRegister)
+  );
+
+// let Routed = withRouter(TherapistRegister)
+// export default connect(mapStateToProps)(Routed);

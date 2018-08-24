@@ -207,7 +207,24 @@ router.post('/', (req, res) => {
     }
 })
 
-//not working yet
+router.post('/therapistname', (req, res) => {
+    console.log('got to post', req.body);
+    if (req.isAuthenticated) {
+        const queryText = `INSERT INTO "therapist_info" ("first_name", "last_name", "person_id") VALUES ($1,$2,$3);`
+        pool.query(queryText, [req.body.first_name, req.body.last_name, req.user.id])
+            .then(() => {
+                res.sendStatus(200);
+            })
+            .catch((error) => {
+                console.log(error);
+                res.sendStatus(500)
+            })
+    } else {
+        res.sendStatus(403);
+    }
+})
+
+
 router.post('/addtherapist', (req, res) => {
     console.log('got to post add therapist', req.body[0].id);
     if (req.isAuthenticated) {

@@ -83,7 +83,7 @@ class PatientLog extends Component {
             content = (
                 <div>
                     <Nav />
-                    <h1>Record Your Mood</h1>
+                    <h2>Record Your Mood</h2>
                     <p>Rate the severity of your depressed mood from 0 (none) to 10 (severe) </p>
                     <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
                     <p>What are you doing right now?</p>

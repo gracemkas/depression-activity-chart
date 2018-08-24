@@ -7,6 +7,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 const moment = require('moment');
 
 const mapStateToProps = state => ({
@@ -125,9 +126,10 @@ class PatientGraph extends Component {
             const data = this.props.dataList;
             content = (
                 <div>
+                    {/* <Grid container justify="center" id="welcome"> */}
                     <Nav />
                     <h3>Graph of Daily Mood</h3>
-                    <h3>Activity: {this.state.currentActivity.activity}</h3>
+                    <h4>Activity: {this.state.currentActivity.activity}</h4>
                     <VictoryChart
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
@@ -166,7 +168,7 @@ class PatientGraph extends Component {
                     </VictoryChart>
                     {/* className={this.props.classes.} */}
                     <p>Click on a bar and then click the update button to edit or delete it</p>
-                    <Button variant="raised" onClick={this.update}>Update</Button>
+                    <Button className="right" variant="raised" onClick={this.update}>Update</Button>
                     <form className={this.props.classes.container} noValidate>
                         <TextField
                             id="date"
@@ -176,7 +178,7 @@ class PatientGraph extends Component {
                             onChange={this.handleChangeFor("choosenDate")}
                         />
                     </form>
-                    <Button variant="raised" onClick={this.changeDate}>Set New Date</Button>
+                    <Button className="right" variant="raised" onClick={this.changeDate}>Set New Date</Button>
                 </div>
             );
         }else{
@@ -186,7 +188,7 @@ class PatientGraph extends Component {
                 <div>
                     <TherapistNav />
                     <h3>Graph of Daily Mood</h3>
-                    <h3>Activity: {this.state.currentActivity.activity}</h3>
+                    <h4>Activity: {this.state.currentActivity.activity}</h4>
                     <VictoryChart
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
@@ -235,7 +237,7 @@ class PatientGraph extends Component {
                             onChange={this.handleChangeForTherapist("choosenTherapistDate")}
                         />
                     </form>
-                    <Button variant="raised" onClick={this.therapistChangeDate}>Set New Date</Button>
+                    <Button className="right" variant="raised" onClick={this.therapistChangeDate}>Set New Date</Button>
                 </div>
             );
 

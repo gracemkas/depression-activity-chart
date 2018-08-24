@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
@@ -79,4 +79,5 @@ class TherapistNav extends Component {
   }
 };
 
-export default connect(mapStateToProps)(TherapistNav);
+let Routed = withRouter(TherapistNav)
+export default connect(mapStateToProps)(Routed);

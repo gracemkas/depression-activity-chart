@@ -119,16 +119,19 @@ class TherapistUpdate extends Component {
         })
 
         if (this.props.user.userName) {
-            console.log('$$$$$$$$', this.props.therapistNameRegister)
+            // console.log('$$$$$$$$', this.props.therapistNameRegister)
             if (this.props.therapistNameRegister.first_name === undefined) {
                 content = (
                     <div>
+
+
                         <TherapistRegister />
                     </div>
                 )
             } else {
             content = (
                 <div>
+                    <TherapistNav />
                     <h2>Patient List</h2>
                     <Paper>
                         <Table>
@@ -157,7 +160,7 @@ class TherapistUpdate extends Component {
 
         return (
             <div>
-                <TherapistNav />
+                
                 {content}
             </div>
         );
