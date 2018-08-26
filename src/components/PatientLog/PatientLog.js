@@ -4,6 +4,7 @@ import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
 import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
+import Grid from '@material-ui/core/Grid';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -82,14 +83,30 @@ class PatientLog extends Component {
             } else {
             content = (
                 <div>
+                    <Grid container justify="center" id="welcome">
+                    <Grid item xs={12}>
                     <Nav />
+                    </Grid>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={8}>
                     <h2>Record Your Mood</h2>
+                    </Grid>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={12}>
                     <p>Rate the severity of your depressed mood from 0 (none) to 10 (severe) </p>
+                    </Grid>
+                    <Grid item xs={4}></Grid>
+                    <Grid item xs={4}>
                     <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
+                    </Grid>
+                    <Grid item xs={4}></Grid>
+                    <Grid item xs={12}>
                     <p>What are you doing right now?</p>
+                    </Grid>
                     <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
                     <Button variant="raised" onClick={this.addLog}>Submit</Button>
                     {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
+                    </Grid>
                 </div>
             );
         }} 

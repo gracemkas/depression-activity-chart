@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     if (req.isAuthenticated) {
         // const todayDate = moment().format('L');
         const todayDate = moment().format().split('T', 1);
-        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" = $1 AND "patient_id" = $2;`;
+        const queryText = `SELECT "time", "depression_rating", "id", "activity" FROM daily_log WHERE "date" = $1 AND "patient_id" = $2 ORDER BY "time";`;
         pool.query(queryText, [todayDate, req.user.id])
             .then((results) => {
                 res.send(results.rows)

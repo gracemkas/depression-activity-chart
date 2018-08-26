@@ -126,10 +126,17 @@ class PatientGraph extends Component {
             const data = this.props.dataList;
             content = (
                 <div>
-                    {/* <Grid container justify="center" id="welcome"> */}
+                    <Grid container justify="center" id="welcome">
+                    <Grid item xs={12}>
                     <Nav />
+                    </Grid>
+                    <Grid item xs={12}>
                     <h3>Graph of Daily Mood</h3>
+                    </Grid>
+                    <Grid item xs={6}>
                     <h4>Activity: {this.state.currentActivity.activity}</h4>
+                    </Grid>
+                    <Grid item xs={12}>
                     <VictoryChart
                         maxDomain={{ y: 10 }}
                         minDomain={{ y: 0 }}
@@ -166,9 +173,18 @@ class PatientGraph extends Component {
                             y="depression_rating"
                         />
                     </VictoryChart>
+                    </Grid>
                     {/* className={this.props.classes.} */}
+                    <Grid item xs={12}>
                     <p>Click on a bar and then click the update button to edit or delete it</p>
+                    </Grid>
+                    <Grid item xs={5}></Grid>
+                    <Grid item xs={2}>
                     <Button className="right" variant="raised" onClick={this.update}>Update</Button>
+                    </Grid>
+                    <Grid item xs={5}></Grid>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={8}>
                     <form className={this.props.classes.container} noValidate>
                         <TextField
                             id="date"
@@ -178,7 +194,14 @@ class PatientGraph extends Component {
                             onChange={this.handleChangeFor("choosenDate")}
                         />
                     </form>
+                    </Grid>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={4}></Grid>
+                    <Grid item xs={4}>
                     <Button className="right" variant="raised" onClick={this.changeDate}>Set New Date</Button>
+                    </Grid>
+                    <Grid item xs={4}></Grid>        
+                </Grid>
                 </div>
             );
         }else{
