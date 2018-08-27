@@ -107,6 +107,14 @@ p {
     float: right;
 }
 
+/* form{
+    margin: 30px;
+} */
+
+.buttonMargin{
+    margin: 10px;
+}
+
 /* .homeButton {
     text-align: center;
 } */

@@ -101,7 +101,7 @@ class ChooseTherapist extends Component {
                     <input placeholder="First Name" onChange={this.handleChangeFor("first_name")} />
                     <input placeholder="Last Name" onChange={this.handleChangeFor("last_name")} />
                     <Button variant="raised" onClick={this.findTherapist}>Search</Button>
-                    {/* <Button variant="raised" onClick={this.currentTherapist}>Back</Button> */}
+                    <Button className="right" variant="raised" onClick={this.currentTherapist}>Back</Button>
 
                     <p>
                         Results:

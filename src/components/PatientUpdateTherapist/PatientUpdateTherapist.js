@@ -131,7 +131,7 @@ class TherapistUpdate extends Component {
                             </TableBody>
                         </Table>
                     </Paper>
-                    <Button variant="raised" onClick={this.currentTherapist}>Back</Button>
+                    {/* <Button variant="raised" onClick={this.currentTherapist}>Back</Button> */}
                 </div>
             );
         }

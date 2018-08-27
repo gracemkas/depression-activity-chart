@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -67,10 +68,20 @@ class CurrentTherapist extends Component {
             let firstName = this.props.therapistName;
             content = (
                 <div>
+                    <Grid container justify="center" id="welcome">
+                    <Grid item xs={12}>
                     <h2>Current Therapist</h2>
+                    </Grid>
+                    <Grid item xs={12}>
                     <p>Therapist Name: {firstName.first_name} {firstName.last_name}</p>
+                    </Grid>
+                    <Grid item xs={3}></Grid>
+                    <Grid item xs={6}>
                     <Button variant="raised" onClick={this.changeTherapist}>Change Therapist</Button>
                     {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
+                    </Grid>
+                    <Grid item xs={3}></Grid>
+                    </Grid>
                 </div>
             );
         }

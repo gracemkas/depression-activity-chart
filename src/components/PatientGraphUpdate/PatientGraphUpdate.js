@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Button from '@material-ui/core/Button';
-import {Delete, Save} from '@material-ui/icons';
+import { Delete, Save } from '@material-ui/icons';
+import Grid from '@material-ui/core/Grid';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -77,14 +78,31 @@ class GraphUpdate extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <h1>Edit or Delete Log</h1>
-                    <p>Edit your depressed mood rating from 0 (none) to 10 (severe) </p>
-                    <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
-                    <p>Edit the activity</p>
-                    <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
-                    <Button variant="raised" onClick={this.saveEdit}><Save /></Button>
-                    <Button variant="raised" onClick={this.deleteLog}><Delete /></Button>
-                    <Button variant="raised" onClick={this.graph}>Back</Button>
+                    <Grid container justify="center">
+                        <Grid item xs={12}>
+                            <h2>Edit or Delete Log</h2>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <p>Edit your depressed mood rating from 0 (none) to 10 (severe) </p>
+                        </Grid>
+                        <Grid item xs={4}></Grid>
+                        <Grid item xs={4}>
+                            <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} />
+                        </Grid>
+                        <Grid item xs={4}></Grid>
+                        <Grid item xs={12}>
+                            <p>Edit the activity</p>
+                        </Grid>
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={9}>
+                            <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
+                            <Button variant="raised" onClick={this.saveEdit}><Save /></Button>
+                            <Button variant="raised" onClick={this.deleteLog}><Delete /></Button>
+                            {/* <Button variant="raised" onClick={this.graph}>Back</Button> */}
+                        </Grid>
+                        <Grid item xs={1}></Grid>
+
+                    </Grid>
                 </div>
             );
         }

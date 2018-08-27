@@ -49,7 +49,7 @@ class PatientGraph extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER })
         this.props.dispatch({ type: 'GET_DATA' })
-        
+
 
     }
 
@@ -68,7 +68,7 @@ class PatientGraph extends Component {
                     [propertyName]: event.target.value
                 }
             })
-            
+
         }
     }
 
@@ -115,157 +115,140 @@ class PatientGraph extends Component {
             payload: this.state.therapistDate
         })
     }
-    
+
 
     render() {
         let content = null;
         console.log('*****', this.props.therapistPatientId);
         if (this.props.user.userName) {
-            if (this.props.user.role === 'patient'){
-            const date = moment().format().split('T', 1);
-            const data = this.props.dataList;
-            content = (
-                <div>
-                    <Grid container justify="center" id="welcome">
-                    <Grid item xs={12}>
-                    <Nav />
-                    </Grid>
-                    <Grid item xs={12}>
-                    <h3>Graph of Daily Mood</h3>
-                    </Grid>
-                    <Grid item xs={6}>
-                    <h4>Activity: {this.state.currentActivity.activity}</h4>
-                    </Grid>
-                    <Grid item xs={12}>
-                    <VictoryChart
-                        maxDomain={{ y: 10 }}
-                        minDomain={{ y: 0 }}
-                        domainPadding={{ x: 15 }}
-                    // scale={{ x: "time" }}
-                    >
-                        {/* <VictoryAxis
+            if (this.props.user.role === 'patient') {
+                const date = moment().format().split('T', 1);
+                const data = this.props.dataList;
+                content = (
+                    <div>
+                                <Nav />
+                                <h3>Graph of Daily Mood</h3>
+                                <h4>Activity: {this.state.currentActivity.activity}</h4>
+                                <VictoryChart
+                                    maxDomain={{ y: 10 }}
+                                    minDomain={{ y: 0 }}
+                                    domainPadding={{ x: 15 }}
+                                // scale={{ x: "time" }}
+                                >
+                                    {/* <VictoryAxis
                             tickFormat={(x) => new Date(x).getHours ()}
                         /> */}
-                        <VictoryBar data={data}
-                            style={{ data: { fill: "#392F5A" } }}
-                            events={[{
-                                target: "data",
-                                eventHandlers: {
-                                    onClick: (evt, clickedProps) => {
-                                        console.log('clicked', clickedProps.datum.id)
-                                        this.changeActivity(clickedProps.datum.activity);
-                                        this.props.dispatch({
-                                            type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
-                                        })
-                                        return [
-                                            {
-                                                target: "data",
-                                                mutation: (props) => {
-                                                    const fill = props.style && props.style.fill;
-                                                    return fill === "black" ? null : { style: { fill: "black" } };
+                                    <VictoryBar data={data}
+                                        style={{ data: { fill: "#392F5A" } }}
+                                        events={[{
+                                            target: "data",
+                                            eventHandlers: {
+                                                onClick: (evt, clickedProps) => {
+                                                    console.log('clicked', clickedProps.datum.id)
+                                                    this.changeActivity(clickedProps.datum.activity);
+                                                    this.props.dispatch({
+                                                        type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
+                                                    })
+                                                    return [
+                                                        {
+                                                            target: "data",
+                                                            mutation: (props) => {
+                                                                const fill = props.style && props.style.fill;
+                                                                return fill === "black" ? null : { style: { fill: "black" } };
+                                                            }
+                                                        }
+                                                    ];
                                                 }
                                             }
-                                        ];
-                                    }
-                                }
-                            }]}
-                            x="time"
-                            y="depression_rating"
-                        />
-                    </VictoryChart>
-                    </Grid>
-                    {/* className={this.props.classes.} */}
-                    <Grid item xs={12}>
-                    <p>Click on a bar and then click the update button to edit or delete it</p>
-                    </Grid>
-                    <Grid item xs={5}></Grid>
-                    <Grid item xs={2}>
-                    <Button className="right" variant="raised" onClick={this.update}>Update</Button>
-                    </Grid>
-                    <Grid item xs={5}></Grid>
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={8}>
-                    <form className={this.props.classes.container} noValidate>
-                        <TextField
-                            id="date"
-                            label="Choose a Date"
-                            type="date"
-                            defaultValue={date}
-                            onChange={this.handleChangeFor("choosenDate")}
-                        />
-                    </form>
-                    </Grid>
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={4}>
-                    <Button className="right" variant="raised" onClick={this.changeDate}>Set New Date</Button>
-                    </Grid>
-                    <Grid item xs={4}></Grid>        
-                </Grid>
-                </div>
-            );
-        }else{
-            const date = moment().format().split('T', 1);
-            const data = this.props.therapistPatientGraph;
-            content = (
-                <div>
-                    <TherapistNav />
-                    <h3>Graph of Daily Mood</h3>
-                    <h4>Activity: {this.state.currentActivity.activity}</h4>
-                    <VictoryChart
-                        maxDomain={{ y: 10 }}
-                        minDomain={{ y: 0 }}
-                        domainPadding={{ x: 15 }}
-                    // scale={{ x: "time" }}
-                    >
-                        {/* <VictoryAxis
+                                        }]}
+                                        x="time"
+                                        y="depression_rating"
+                                    />
+                                </VictoryChart>
+                                <p>Click on a bar and then click the update button to edit or delete it</p>
+                            <Grid container justify="center" id="welcome">
+                                <Button className="right" variant="raised" onClick={this.update}>Update</Button>
+                            </Grid>
+                                <form className={this.props.classes.container} noValidate>
+                                    <TextField
+                                        id="date"
+                                        label="Choose a Date"
+                                        type="date"
+                                        defaultValue={date}
+                                        onChange={this.handleChangeFor("choosenDate")}
+                                    />
+                                </form>
+                            <Grid container justify="center" id="welcome">
+                                <Button className="buttonMargin" variant="raised" onClick={this.changeDate}>Set New Date</Button>
+                            </Grid>
+                            <Grid item xs={4}></Grid>
+                        {/* </Grid> */}
+                    </div>
+                );
+            } else {
+                const date = moment().format().split('T', 1);
+                const data = this.props.therapistPatientGraph;
+                content = (
+                    <div>
+                        <TherapistNav />
+                        <h3>Graph of Daily Mood</h3>
+                        <h4>Activity: {this.state.currentActivity.activity}</h4>
+                        <VictoryChart
+                            maxDomain={{ y: 10 }}
+                            minDomain={{ y: 0 }}
+                            domainPadding={{ x: 15 }}
+                        // scale={{ x: "time" }}
+                        >
+                            {/* <VictoryAxis
                             tickFormat={(x) => new Date(x).getHours ()}
                         /> */}
-                        <VictoryBar data={data}
-                            style={{ data: { fill: "#392F5A" } }}
-                            events={[{
-                                target: "data",
-                                eventHandlers: {
-                                    onClick: (evt, clickedProps) => {
-                                        console.log('clicked', clickedProps.datum.id)
-                                        this.changeActivity(clickedProps.datum.activity);
-                                        this.props.dispatch({
-                                            type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
-                                        })
-                                        return [
-                                            {
-                                                target: "data",
-                                                mutation: (props) => {
-                                                    const fill = props.style && props.style.fill;
-                                                    return fill === "black" ? null : { style: { fill: "black" } };
+                            <VictoryBar data={data}
+                                style={{ data: { fill: "#392F5A" } }}
+                                events={[{
+                                    target: "data",
+                                    eventHandlers: {
+                                        onClick: (evt, clickedProps) => {
+                                            console.log('clicked', clickedProps.datum.id)
+                                            this.changeActivity(clickedProps.datum.activity);
+                                            this.props.dispatch({
+                                                type: 'UPDATE_LOG_ID', payload: clickedProps.datum.id
+                                            })
+                                            return [
+                                                {
+                                                    target: "data",
+                                                    mutation: (props) => {
+                                                        const fill = props.style && props.style.fill;
+                                                        return fill === "black" ? null : { style: { fill: "black" } };
+                                                    }
                                                 }
-                                            }
-                                        ];
+                                            ];
+                                        }
                                     }
-                                }
-                            }]}
-                            x="time"
-                            y="depression_rating"
-                        />
-                    </VictoryChart>
-                    {/* className={this.props.classes.} */}
-                    {/* <p>Click on a bar and then click the update button to edit or delete it</p>
+                                }]}
+                                x="time"
+                                y="depression_rating"
+                            />
+                        </VictoryChart>
+                        {/* className={this.props.classes.} */}
+                        {/* <p>Click on a bar and then click the update button to edit or delete it</p>
                     <Button variant="raised" onClick={this.update}>Update</Button> */}
-                    <form className={this.props.classes.container} noValidate>
-                        <TextField
-                            id="date"
-                            label="Choose a Date"
-                            type="date"
-                            defaultValue={date}
-                            onChange={this.handleChangeForTherapist("choosenTherapistDate")}
-                        />
-                    </form>
-                    <Button className="right" variant="raised" onClick={this.therapistChangeDate}>Set New Date</Button>
-                </div>
-            );
+                        <form className={this.props.classes.container} noValidate>
+                            <TextField
+                                id="date"
+                                label="Choose a Date"
+                                type="date"
+                                defaultValue={date}
+                                onChange={this.handleChangeForTherapist("choosenTherapistDate")}
+                            />
+                        </form>
+                        <Grid container justify="center" id="welcome">
+                        <Button className="right" variant="raised" onClick={this.therapistChangeDate}>Set New Date</Button>
+                        </Grid>
+                    </div>
+                );
 
-        } 
-    }
+            }
+        }
 
         return (
             <div>
