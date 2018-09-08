@@ -16,7 +16,6 @@ const mapStateToProps = state => ({
 });
 
 class ChooseTherapist extends Component {
-
     constructor(props) {
         super(props)
 
@@ -55,7 +54,6 @@ class ChooseTherapist extends Component {
         }
     }
 
-
     findTherapist = () => {
         console.log('find', this.state.therapistSearch)
         this.props.dispatch({
@@ -71,8 +69,6 @@ class ChooseTherapist extends Component {
             payload: this.props.foundTherapist
         })
         this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' })
-
-        // this.props.history.push('patientHome');
     }
 
     render() {

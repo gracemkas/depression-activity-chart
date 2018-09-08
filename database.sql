@@ -22,7 +22,7 @@ CREATE TABLE "daily_log" (
     "id" SERIAL PRIMARY KEY,
     "depression_rating" INT NOT NULL,
     "activity" VARCHAR (1000) NOT NULL,
-    "date" DATE,
+    "date" VARCHAR (25),
     "time" time,
     "patient_id" INT
 );
