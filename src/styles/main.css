@@ -68,9 +68,9 @@ ul {
     overflow: hidden;
 }
 
-li {
+/* li {
     float: left;
-}
+} */
 
 li a {
     display: block;
