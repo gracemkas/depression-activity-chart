@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import Button from '@material-ui/core/Button';
+
+import Nav from '../../components/Nav/Nav';
 import PatientChooseTherapist from '../PatientChooseTherapist/PatientChooseTherapist';
+
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 const mapStateToProps = state => ({
