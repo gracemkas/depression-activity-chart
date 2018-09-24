@@ -177,8 +177,8 @@ router.post('/', (req, res) => {
         const newLog = req.body
         const date = moment().format().split('T', 1);
         const time = moment().format('h:mm a');
-        const queryText = `INSERT INTO "daily_log" ("depression_rating", "activity", "date", "time", "patient_id") VALUES ($1,$2,$3,$4,$5)`
-        pool.query(queryText, [newLog.depression_rating, newLog.activity, date, time, req.user.id])
+        const queryText = `INSERT INTO "daily_log" ("depression_rating", "activity", "date", "time", "patient_id", "category") VALUES ($1,$2,$3,$4,$5,$6)`
+        pool.query(queryText, [newLog.depression_rating, newLog.activity, date, time, req.user.id, newLog.category])
             .then(() => {
                 res.sendStatus(200);
             })

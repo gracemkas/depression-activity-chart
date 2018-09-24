@@ -29,7 +29,7 @@ const styles = {
     },
     formControl: {
         margin: '0em 0em 0.5em 0em',
-        width: "5em"
+        width: "6em"
     },
     selectEmpty: {
         marginTop: '0em 0em 0.5em 0em' * 2,
@@ -44,7 +44,8 @@ class PatientLog extends Component {
         this.state = {
             newLog: {
                 depression_rating: '',
-                activity: ''
+                activity: '',
+                category: ''
             }
         }
     }
@@ -175,8 +176,8 @@ class PatientLog extends Component {
                             <FormControl className={this.props.classes.formControl}>
                                 <InputLabel>Category</InputLabel>
                                 <Select
-                                value={this.state.newLog.depression_rating}
-                                onChange={this.handleChangeFor("depression_rating")}
+                                value={this.state.newLog.category}
+                                onChange={this.handleChangeFor("category")}
                                 // id='SLODrop'
                                 >
                                     <MenuItem value="School">
