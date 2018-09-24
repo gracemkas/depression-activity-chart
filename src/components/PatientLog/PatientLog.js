@@ -164,6 +164,37 @@ class PatientLog extends Component {
                                         <em>10</em>
                                     </MenuItem>
                                 </Select>
+                            </FormControl>                            
+                            <Grid item xs={12}>
+                                <p>Choose the most relevant category for your current activity:</p>
+                            </Grid>
+                            <Grid item xs={4}></Grid>
+                            <Grid item xs={4}>
+                            </Grid>
+                            <Grid item xs={4}></Grid>
+                            <FormControl className={this.props.classes.formControl}>
+                                <InputLabel>Category</InputLabel>
+                                <Select
+                                value={this.state.newLog.depression_rating}
+                                onChange={this.handleChangeFor("depression_rating")}
+                                // id='SLODrop'
+                                >
+                                    <MenuItem value="School">
+                                        <em>School</em>
+                                    </MenuItem>
+                                    <MenuItem value="Work">
+                                        <em>Work</em>
+                                    </MenuItem>
+                                    <MenuItem value="Friends">
+                                        <em>Friends</em>
+                                    </MenuItem>
+                                    <MenuItem value="Family">
+                                        <em>Family</em>
+                                    </MenuItem>
+                                    <MenuItem value="Family">
+                                        <em>Other</em>
+                                    </MenuItem>
+                                </Select>
                             </FormControl>
                             <Grid item xs={12}>
                                 <p>What are you doing right now?</p>
