@@ -12,6 +12,8 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 
 const mapStateToProps = state => ({
@@ -21,8 +23,8 @@ const mapStateToProps = state => ({
 
 const styles = {
     textField: {
-        margin: '0em 0em 0.5em 0em',
-        width: "14em"
+        margin: '0em 0em 0em 0.5em',
+        width: "7em"
     },
     dropDown: {
         width: "10em"
@@ -33,6 +35,9 @@ const styles = {
     },
     selectEmpty: {
         marginTop: '0em 0em 0.5em 0em' * 2,
+    },
+    button: {
+        margin: '1em 5em 0em 1.5em'
     }
 }
 
@@ -111,24 +116,21 @@ class PatientLog extends Component {
                             <Grid item xs={12}>
                                 <Nav />
                             </Grid>
-                            <Grid item xs={2}></Grid>
-                            <Grid item xs={8}>
-                                <h2>Record Your Mood</h2>
+                            <Grid item xs={12}>
+                                <Typography className='centerHeadings' variant="display1">Record Your Mood</Typography>
                             </Grid>
                             <Grid item xs={2}></Grid>
-                            <Grid item xs={12}>
-                                <p>Rate the severity of your depressed mood from 0 (none) to 10 (severe) </p>
+                            <Grid className='logText' item xs={12}>
+                                <Typography className='centerHeadings' variant="subheading">Rate the severity of your depressed mood from 0 (none) to 10 (severe) </Typography>
                             </Grid>
                             <Grid item xs={4}></Grid>
-                            <Grid item xs={4}>
-                                {/* <input placeholder="Depressed Mood Rating" onChange={this.handleChangeFor("depression_rating")} /> */}
-                            </Grid>
+                            <Grid item xs={4}></Grid>
                             <Grid item xs={4}></Grid>
                             <FormControl className={this.props.classes.formControl}>
                                 <InputLabel>Rating</InputLabel>
                                 <Select
-                                value={this.state.newLog.depression_rating}
-                                onChange={this.handleChangeFor("depression_rating")}
+                                    value={this.state.newLog.depression_rating}
+                                    onChange={this.handleChangeFor("depression_rating")}
                                 // id='SLODrop'
                                 >
                                     <MenuItem value="0">
@@ -165,9 +167,9 @@ class PatientLog extends Component {
                                         <em>10</em>
                                     </MenuItem>
                                 </Select>
-                            </FormControl>                            
-                            <Grid item xs={12}>
-                                <p>Choose the most relevant category for your current activity:</p>
+                            </FormControl>
+                            <Grid className='logText' item xs={12}>
+                                <Typography className='centerHeadings' variant="subheading">Choose the most relevant category for your current activity:</Typography>
                             </Grid>
                             <Grid item xs={4}></Grid>
                             <Grid item xs={4}>
@@ -176,8 +178,8 @@ class PatientLog extends Component {
                             <FormControl className={this.props.classes.formControl}>
                                 <InputLabel>Category</InputLabel>
                                 <Select
-                                value={this.state.newLog.category}
-                                onChange={this.handleChangeFor("category")}
+                                    value={this.state.newLog.category}
+                                    onChange={this.handleChangeFor("category")}
                                 // id='SLODrop'
                                 >
                                     <MenuItem value="School">
@@ -197,12 +199,27 @@ class PatientLog extends Component {
                                     </MenuItem>
                                 </Select>
                             </FormControl>
-                            <Grid item xs={12}>
-                                <p>What are you doing right now?</p>
+                            <Grid className='logText' item xs={12}>
+                                <Typography className='centerHeadings' variant="subheading">What are you doing right now?</Typography>
                             </Grid>
-                            <input placeholder="Current Activity" onChange={this.handleChangeFor("activity")} />
-                            <Button variant="raised" onClick={this.addLog}>Submit</Button>
-                            {/* <Button variant="raised" onClick={this.home}>Back</Button> */}
+                        </Grid>
+                        <Grid container justify="center" id="welcome">
+                            <Grid item xs={4}></Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    className={this.props.classes.textField}
+                                    label="Current Activity"
+                                    value={this.state.newLog.activity}
+                                    onChange={this.handleChangeFor("activity")}
+                                    margin="normal"
+                                />
+                            </Grid>
+                            <Grid item xs={4}></Grid>
+                            <Grid item xs={4}></Grid>
+                            <Grid item xs={4}>
+                                <Button className={this.props.classes.button} variant="raised" onClick={this.addLog}>Submit</Button>
+                            </Grid>
+                            <Grid item xs={4}></Grid>
                         </Grid>
                     </div>
                 );

@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import { VictoryBar, VictoryChart } from 'victory';
 
@@ -31,6 +32,9 @@ const styles = theme => ({
         marginRight: theme.spacing.unit,
         width: 200,
     },
+    center: {
+        margin:'1em 0em 0em 0em'
+    }
 });
 class PatientGraph extends Component {
     constructor(props) {
@@ -120,15 +124,15 @@ class PatientGraph extends Component {
                 content = (
                     <div>
                         <Nav />
-                        <h3>Graph of Daily Mood</h3>
-                        <h4>Activity: {this.state.currentActivity.activity}</h4>
+                        <Typography className='centerHeadings' variant="display1">Graph of Daily Mood</Typography>
+                        <Typography className={this.props.classes.center} variant="title">Activity: {this.state.currentActivity.activity}</Typography>
                         <VictoryChart
                             maxDomain={{ y: 10 }}
                             minDomain={{ y: 0 }}
                             domainPadding={{ x: 15 }}
                         >
                             <VictoryBar data={data}
-                                style={{ data: { fill: "#392F5A" } }}
+                                style={{ data: { fill: "#3F4045" } }}
                                 events={[{
                                     target: "data",
                                     eventHandlers: {
