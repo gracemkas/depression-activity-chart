@@ -55,8 +55,6 @@ class PatientLog extends Component {
         }
     }
 
-
-
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({ type: 'GET_CURRENT_THERAPIST' });
@@ -69,7 +67,6 @@ class PatientLog extends Component {
     componentDidUpdate() {
         if (!this.props.user.isLoading && this.props.user.userName === null) {
             this.props.history.push('home');
-
         }
     }
 
@@ -117,7 +114,7 @@ class PatientLog extends Component {
                                 <Nav />
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography className='centerHeadings' variant="display1">Record Your Mood</Typography>
+                                <Typography className='centerHeadings' variant="display1">How are you feeling?</Typography>
                             </Grid>
                             <Grid item xs={2}></Grid>
                             <Grid className='logText' item xs={12}>
@@ -188,6 +185,9 @@ class PatientLog extends Component {
                                     <MenuItem value="Work">
                                         <em>Work</em>
                                     </MenuItem>
+                                    <MenuItem value="Work">
+                                        <em>Home</em>
+                                    </MenuItem>
                                     <MenuItem value="Friends">
                                         <em>Friends</em>
                                     </MenuItem>
@@ -225,7 +225,6 @@ class PatientLog extends Component {
                 );
             }
         }
-
         return (
             <div>
                 {content}
